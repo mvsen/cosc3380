@@ -21,6 +21,7 @@
                     if (isset($_SESSION["useruid"]))
                     {
                         echo '<li><a href ="profile.php">Profile Page</a><li>';
+                        echo '<li><a href ="shop.php">Shop</a><li>';
                         echo '<li><a href ="includes/logout.inc.php">Log Out</a><li>';
 
                     }
