@@ -113,6 +113,16 @@ function createUser($conn, $name, $email, $username, $pwd)
 
 }
 
+
+
+
+
+
+
+
+
+
+
 function emptyInputLogin($username, $pwd) 
 {
     $result;

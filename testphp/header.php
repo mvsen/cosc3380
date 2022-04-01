@@ -9,6 +9,7 @@
 
 <head>
     <title> ZOO Group 6 </title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -22,9 +23,9 @@
                     {
                         if(($_SESSION["useruid"]) == 'adminZOO')
                         {
-                            echo '<li><a href ="profile.php">Staff</a><li>';
-                            echo '<li><a href ="shop.php">Schedule</a><li>';
-                            echo '<li><a href ="shop.php">Inventory</a><li>';
+                            echo '<li><a href ="staff.php">Staff</a><li>';
+                            echo '<li><a href ="schedule.php">Schedule</a><li>';
+                            echo '<li><a href ="inventory.php">Inventory</a><li>';
                             echo '<li><a href ="includes/logout.inc.php">Log Out</a><li>';
                         }
                         else{
