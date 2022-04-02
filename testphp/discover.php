@@ -17,7 +17,7 @@ include_once 'header.php'
 
         
 
-            <h1> This is a Staff page</h1>
+            <h1> This is a Discover page</h1>
             <p> Here is some importnat information </p>
         </section>
 
