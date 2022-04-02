@@ -74,7 +74,22 @@ echo "<p>You have succesfully signed up!</p>";
 }
 
 ?>
-</section>
+
+
+<section><form action="/action_page.php">
+  <label for="cars">Choose field to Update:</label>
+  <select name="cars" id="cars">
+    <option value="name">Name</option>
+    <option value="email">Email</option>
+    <option value="uid">Username</option>
+    <option value="pwd">Password</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form></section>
+
+
+
 
 
 

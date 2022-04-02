@@ -18,6 +18,7 @@
             <ul> 
                 <li><a href ="index.php">Home</a><li>
                 <li><a href ="discover.php">Discover</a><li>
+
                 <?php
                     if (isset($_SESSION["useruid"]))
                     {
