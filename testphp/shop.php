@@ -1,15 +1,7 @@
 <?php
-include_once 'header.php';
-
+include_once 'header.php'
 
 ?>
-
-<style>
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-</style>
 
 <section class ="index-intro">
         <?php
@@ -18,11 +10,14 @@ include_once 'header.php';
                         echo "<p> Hello there " . $_SESSION['useruid'] . "</p>";
                         
                     }
+
+
+
         ?>
 
         
 
-            <h1> This is a Inventory page</h1>
+            <h1> This is a shop page</h1>
             <p> Here is some importnat information </p>
         </section>
 

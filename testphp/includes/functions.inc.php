@@ -110,7 +110,19 @@ function createUser($conn, $name, $email, $username, $pwd)
 
 
 
+
 }
+
+
+
+
+
+
+
+
+
+
+
 function emptyInputLogin($username, $pwd) 
 {
     $result;
@@ -131,20 +143,22 @@ function loginUser($conn, $username, $pwd)
 
     if ($uidExists === false)
     {
-        header("location: ../login.php?error=wronglogin");
+        header("location: ../login.php?error=wronglogin1");
         exit();
     }
 
     $pwdHashed = $uidExists["usersPwd"];
     $checkPwd = password_verify($pwd, $pwdHashed);
     if ($checkPwd === false){
-        header("location: ../login.php?error=wronglogin");
+        header("location: ../login.php?error=wronglogin2");
     }
     else if ($checkPwd === true)
     {
         session_start();
         $_SESSION["userid"] = $uidExists["usersId"];
         $_SESSION["useruid"] = $uidExists["usersUid"];
+
+        
         header("location: ../index.php");
         exit();
 
