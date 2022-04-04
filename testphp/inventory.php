@@ -13,6 +13,7 @@ require_once 'includes\dbh.inc.php';
     .nametext {width : 80px}
     .quantext { width : 70px}
     .costtext {width : 50px}
+    .addbut {display: block; margin:auto}
 </style>
 
 <section class ="index-intro">
@@ -90,8 +91,8 @@ require_once 'includes\dbh.inc.php';
                 echo '<td> <input type = "text" class = "nametext" name = "newName" /> </td>';
                 echo '<td> <input type = "text" class = "quantext" name = "newQuantity" /> </td>';
                 echo '<td> <input type = "text" class = "costtext" name = "newCost" /> </td>';
-                echo '<td>';
-                echo '<input type = "submit" value = "Add" name = "add" />';
+                echo '<td colspan = "2">';
+                echo '<input type = "submit" class = "addbut" value = "Add" name = "add" />';
                 if (isset($_POST['add'])) {
                     $nName = $_POST['newName'];
                     $nQuan = $_POST['newQuantity'];
@@ -118,8 +119,8 @@ require_once 'includes\dbh.inc.php';
                 echo '<td> <input type = "text" class = "nametext" name = "newName" /> </td>';
                 echo '<td> <input type = "text" class = "quantext" name = "newQuantity" /> </td>';
                 echo '<td> <input type = "text" class = "costtext" name = "newCost" /> </td>';
-                echo '<td>';
-                echo '<input type = "submit" value = "Add" name = "add" />';
+                echo '<td colspan = "2">';
+                echo '<input type = "submit" class = "addbut" value = "Add" name = "add" />';
                 if (isset($_POST['add'])) {
                     $nName = $_POST['newName'];
                     $nQuan = $_POST['newQuantity'];
