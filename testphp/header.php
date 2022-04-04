@@ -25,7 +25,7 @@ body {
 }
 
 .container {
-	width: 100%;
+	width: 80%;
 	margin: 0 auto;
 }
 
@@ -57,7 +57,7 @@ nav ul {
 
 nav li {
   display: inline-block;
-  margin-left: 70px;
+  margin-left: 40px;
   padding-top: 23px;
 
   position: relative;
