@@ -154,11 +154,11 @@ function loginUser($conn, $username, $pwd)
 
 function createEmployee($conn, $name, $birthday, $gender, $email, $phone_number, $wage, $job_title, $department, $worksAt)
 {
-    $sql = "INSERT into ZOOSchema.users (E_Name, E_Birthdate, E_Gender, E_Email, E_phone_number, E_Pay, E_JobTitle, E_Department, E_WorksAt E_) VALUES (?,?,?,?);";
+    $sql = "INSERT into ZOOSchema.Employee(E_Name, E_Birthdate, E_Gender, E_Email, E_phone_number, E_Pay, E_JobTitle, E_Department, E_WorksAt E_) VALUES (?,?,?,?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql))
     {
-        header("location: ../signup.php?error=stmt2failed");
+        header("location: ../staff.php?error=stmt2failed");
         exit();
 
     }
