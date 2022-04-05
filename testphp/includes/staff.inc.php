@@ -12,8 +12,8 @@ if (isset($_POST["submit"]))
     $pwd = $_POST["pwd"];
     $pwdrepeat = $_POST["pwdrepeat"];
     $wage = $_POST["wage"];
-    $ephone_number1 = $_POST["ephone_number1"];
     $job_title = $_POST["job_title"];
+    $workHours = $_POST["workHours"]
     $department = $_POST["department"];
     $worksAt = $_POST["worksAt"];
 
@@ -21,7 +21,7 @@ if (isset($_POST["submit"]))
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
 
-    if (emptyInputEmployee($name,$birthday,$gender, $email, $phone_number, $address, $username, $pwd, $pwdrepeat, $wage, $job_title, $department, $worksAt) !== false)
+    if (emptyInputEmployee($name,$birthday,$gender, $email, $phone_number, $address, $username, $pwd, $pwdrepeat, $wage, $job_title, $workHours, $department, $worksAt) !== false)
     {
         header("location: ../staff.php?error=emptyinput");
         exit();
@@ -49,7 +49,8 @@ if (isset($_POST["submit"]))
     }
 
     createUser($conn, $name, $email, $username, $pwd);
-    createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $username, $pwd, $pwdrepeat, $wage, $job_title, $department, $worksAt);
+    createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt);
+
 }
 else {
     header("location: ../staff.php?error=none");
