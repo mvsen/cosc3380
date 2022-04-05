@@ -44,7 +44,7 @@ if (isset($_POST["submit"]))
     }
     if (uidExists($conn, $username, $email) !== false)
     {
-        header("location: ../signup.php?error=usernametaken");
+        header("location: ../staff.php?error=usernametaken");
         exit();
     }
 
