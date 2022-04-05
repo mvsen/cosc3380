@@ -29,6 +29,7 @@ include_once 'header.php'
                 <p> Job Description </p>                
                 <input type="text" name="wage" placeholder="Wage ($/hr)">
                 <input type="text" name="job_title" placeholder="Job Title">
+                <input type="text" name="workHours" placeholder="Work Hours">
                 <input type="text" name="department" placeholder="Department">
                 <input type="text" name="worksAt" placeholder="Works at">
                 <button type="submit" name="submit"> Add Employee </button>
