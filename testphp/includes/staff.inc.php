@@ -49,8 +49,7 @@ if (isset($_POST["submit"]))
     }
 
     createUser($conn, $name, $email, $username, $pwd);
-    createEmployee($conn, $name, $birthday, $gender, $email, $phone_number, $wage, $job_title, $department, $worksAt);
-
+    createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $username, $pwd, $pwdrepeat, $wage, $job_title, $department, $worksAt);
 }
 else {
     header("location: ../staff.php?error=none");
