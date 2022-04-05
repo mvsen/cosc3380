@@ -13,7 +13,7 @@ if (isset($_POST["submit"]))
     $pwdrepeat = $_POST["pwdrepeat"];
     $wage = $_POST["wage"];
     $job_title = $_POST["job_title"];
-    $workHours = $_POST["workHours"]
+    $workHours = $_POST["workHours"];
     $department = $_POST["department"];
     $worksAt = $_POST["worksAt"];
 
