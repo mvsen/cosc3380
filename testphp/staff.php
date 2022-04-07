@@ -24,7 +24,7 @@ include_once 'header.php'
                    <option value="Female">Female</option>
                    <option value="Male">Male</option>
                 </select>
-                <input type="tel" id="phone" name="phone" placeholder="Phone Number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" style="height:50px; width:150px;">
+                <input type="tel" id="phone" name="phone" placeholder="Phone Number XXX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" style="height:50px; width:150px;">
                 <input type="text" name="address" placeholder="Street, City, State, Zipcode" style="height:50px; width:150px;">
                 <p> Create Account for Employee </p>
                 <input type="text" name="email" placeholder="email..." style="height:50px; width:150px;">
