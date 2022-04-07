@@ -47,9 +47,17 @@ if (isset($_POST["submit"]))
         header("location: ../staff.php?error=usernametaken");
         exit();
     }
+    if(invalidBDay($birthday) !== false) {
+        header("location: ../staff.php?error=invalidBDay");
+    }
+    if(isValidTelephoneNumber($phone_number) == false)
+    {
+        header("location: ../staff.php?error=invalidphonenumber");
+    }
+    
 
-    createUser($conn, $name, $email, $username, $pwd);
-    createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt);
+    createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt,$username,$pwd);
+    
 
 }
 else {
