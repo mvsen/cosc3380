@@ -165,3 +165,77 @@ function loginUser($conn, $username, $pwd)
     }
 
 }
+
+function createUserEmployee($conn, $name, $email, $username, $pwd)
+{
+    $sql = "INSERT into ZOOSchema.users (usersName, usersEmail, usersUid, usersPwd) VALUES (?,?,?,?);";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../staff.php?error=stmt2failed");
+        exit();
+
+    }
+
+    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hashedPwd);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+
+
+    header("location: ../staff.php?error=none");
+    exit();
+
+}
+
+function createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt,$username,$pwd) {
+    $sql = "INSERT into ZOOSchema.Employees(E_Name, E_Birthdate, E_Gender, E_Email, E_Phonenumber, E_Address, E_Pay, E_JobTitle, E_WorkHours, E_Department, E_WorksAtS) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../staff.php?error=stmt2failed");
+        exit();
+
+    }
+
+    //$hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+    mysqli_stmt_bind_param($stmt, "sssssssssss", $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title,$workHours, $department, $worksAt );
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+    createUserEmployee($conn, $name, $email, $username, $pwd);
+
+    header("location: ../staff.php?error=none");
+    exit();
+
+}
+
+
+function emptyInputEmployee($name,$birthday,$gender, $email, $phone_number, $address, $username, $pwd, $pwdrepeat, $wage, $job_title, $workHours, $department, $worksAt) 
+{
+    $result;
+
+    if (empty($name) || empty($birthday) || empty($gender) || empty($email) || empty($phone_number) || empty($address) || empty($username) || empty($pwd) || empty($pwdrepeat) || empty($wage) || empty($job_title) || empty($$workHours) || empty($department) || empty($worksAt))
+    {
+        $result = true;
+    }
+    else{
+        $result = false;
+    }
+    return $result;
+}
+function invalidBDay($birthday) {
+    $result;
+    $max = new DateTime();
+    if($birthday>=$max) {
+        $result = false;
+    }
+    else{$result = true;}
+    return $result;
+}
+
+
+
