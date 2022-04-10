@@ -47,7 +47,7 @@ require_once 'includes\dbh.inc.php';
                 </tr>
 
             <?php
-            $sql = "SELECT * FROM Employees";
+            $sql = "SELECT * FROM Employees"; //May need to specify departments here
             $result = $conn->query($sql);
             // output data of each row 
             if ($result->num_rows > 0) {
@@ -63,7 +63,7 @@ require_once 'includes\dbh.inc.php';
                     echo '<td> <input type = "text" class = "phonenumbertext" value = "'.$row["E_PhoneNumber"].'" name = "phone number'.$i.'" readonly /> </td>';
                     echo '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].'" name = "store location'.$i.'" readonly /> </td>';
                     echo '<td> <input type = "text" class = "worksatastext" value = "'.$row["E_WorksAtAS"].'" name = "animal section location'.$i.'" readonly /> </td>';
-                    /*echo '<td>';
+                    echo '<td>';
                     echo '<input type = "submit" value ="Update" name = "up_row'.$i.'" />';
                     
                     if (isset($_POST['up_row'.$i.''])) {
@@ -76,7 +76,7 @@ require_once 'includes\dbh.inc.php';
                         $nPhoneNumber = $_POST['phone'.$i.''];
                         $nWorksAtS = $_POST['store location'.$i.''];
                         $nWorksAtAS = $_POST['animal section location'.$i.''];
-                        $update = "UPDATE Employee SET E_Name ='$nName', E_JobTitle ='$nJobTitle', E_WorkHours ='$nWorkHours', E_Email ='$nEmail', E_PhoneNumber = '$nPhoneNumber', E_WorksAtS = '$nWorksAtS', E_WorksAtAS = '$nWorksAtAS' WHERE E_ID = '$nID'";
+                        $update = "UPDATE Employee SET /*E_Name ='$nName', E_JobTitle ='$nJobTitle',*/ E_WorkHours ='$nWorkHours'/*, E_Email ='$nEmail', E_PhoneNumber = '$nPhoneNumber', E_WorksAtS = '$nWorksAtS', E_WorksAtAS = '$nWorksAtAS'*/ WHERE E_ID = '$nID'";
                         $qry = $conn ->query($update);
                         if ($qry == false) {echo "FAIL";} else {
                             header ("location: schedule.php");
@@ -84,7 +84,7 @@ require_once 'includes\dbh.inc.php';
                     }
                     echo '</td>';
 
-                    echo '<td>';
+                    /*echo '<td>';
                     echo '<input type = "submit" value = "Delete" name = "del_row'.$i.'" />';
 
                     if (isset($_POST['del_row'.$i.''])) {
@@ -92,7 +92,7 @@ require_once 'includes\dbh.inc.php';
                         $delete = "DELETE from Employees WHERE E_ID = '$nID'";
                         $qry = $conn -> query($delete);
                         if ($qry == false) {echo "Failed Delete";} else {
-                            header ("location: inventroy.php");
+                            header ("location: schedule.php");
                         }
                     }
                 
@@ -180,6 +180,7 @@ require_once 'includes\dbh.inc.php';
     <?php
 include_once 'footer.php'
 
-?>
 //I'm stealing Jeffery's whole style lol
 //Currently standing on the shoulder of giants
+
+?>

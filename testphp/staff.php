@@ -1,32 +1,10 @@
 <?php
 include_once 'header.php'
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/Thu
 ?>
 
 <section class ="index-intro">
         <?php
-<<<<<<< HEAD
-                    if (isset($_SESSION["useruid"]))
-                    {
-                        echo "<p> Hello there " . $_SESSION['useruid'] . "</p>";
-                        
-                    }
-
-
-
-        ?>
-
-        
-
-            <h1> This is a Staff page</h1>
-            <p> Here is some importnat information </p>
-        </section>
-
-=======
         
                     if (isset($_SESSION["useruid"]))
                     {
@@ -123,13 +101,8 @@ if (isset($_GET["error"]))
             <p> Request Information about the employees </p>
         </section>
          
->>>>>>> origin/Thu
 
         <?php
 include_once 'footer.php'
 
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> origin/Thu
