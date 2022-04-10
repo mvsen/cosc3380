@@ -105,13 +105,13 @@ nav a:hover::before {
                 <?php
                     if (isset($_SESSION["useruid"]))
                     {
-                        if(($_SESSION["usersRank"]) == 'employee')
+                        if(($_SESSION["userR"]) == 'employee')
                         {
                             echo '<li><a href ="profile.php">Profile Page</a><li>';
                             echo '<li><a href ="schedule.php">Shop</a><li>';
                             echo '<li><a href ="includes/logout.inc.php">Log Out</a><li>';
                         }
-                        else if(($_SESSION["usersRank"]) == 'customer') {
+                        else if(($_SESSION["userR"]) == 'customer') {
                             echo '<li><a href ="profile.php">Profile Page</a><li>';
                             echo '<li><a href ="shop.php">Shop</a><li>';
                             echo '<li><a href ="includes/logout.inc.php">Log Out</a><li>';
