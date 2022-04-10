@@ -7,6 +7,7 @@ if (isset($_POST["submit"]))
     $username = $_POST["uid"];
     $pwd = $_POST["pwd"];
     $pwdrepeat = $_POST["pwdrepeat"];
+    $rank = "customer";
 
 
     require_once 'dbh.inc.php';

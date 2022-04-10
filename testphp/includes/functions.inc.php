@@ -88,7 +88,7 @@ function uidExists($conn, $username, $email)
 
 function createUser($conn, $name, $email, $username, $pwd)
 {
-    $sql = "INSERT into ZOOSchema.users (usersName, usersEmail, usersUid, usersPwd) VALUES (?,?,?,?);";
+    $sql = "INSERT into ZOOSchema.users (usersName, usersEmail, usersUid, usersPwd, usersRank) VALUES (?,?,?,? ,?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql))
     {
@@ -98,7 +98,8 @@ function createUser($conn, $name, $email, $username, $pwd)
     }
 
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hashedPwd);
+    $uRank = "customer";
+    mysqli_stmt_bind_param($stmt, "sssss", $name, $email, $username, $hashedPwd,  $uRank);
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);

@@ -105,18 +105,25 @@ nav a:hover::before {
                 <?php
                     if (isset($_SESSION["useruid"]))
                     {
-                        if(($_SESSION["useruid"]) == 'adminZOO')
+                        if(($_SESSION["usersRank"]) == 'employee')
                         {
-                            echo '<li><a href ="staff.php">Staff</a><li>';
-                            echo '<li><a href ="schedule.php">Schedule</a><li>';
-                            echo '<li><a href ="inventory.php">Inventory</a><li>';
+                            echo '<li><a href ="profile.php">Profile Page</a><li>';
+                            echo '<li><a href ="schedule.php">Shop</a><li>';
                             echo '<li><a href ="includes/logout.inc.php">Log Out</a><li>';
                         }
-                        else{
+                        else if(($_SESSION["usersRank"]) == 'customer') {
                             echo '<li><a href ="profile.php">Profile Page</a><li>';
                             echo '<li><a href ="shop.php">Shop</a><li>';
                             echo '<li><a href ="includes/logout.inc.php">Log Out</a><li>';
 
+                        }
+                        else{
+                          
+
+                            echo '<li><a href ="staff.php">Staff</a><li>';
+                            echo '<li><a href ="schedule.php">Schedule</a><li>';
+                            echo '<li><a href ="inventory.php">Inventory</a><li>';
+                            echo '<li><a href ="includes/logout.inc.php">Log Out</a><li>';
                         }
                        
          
