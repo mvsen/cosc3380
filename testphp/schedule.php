@@ -10,9 +10,13 @@ require_once 'includes\dbh.inc.php';
         border-collapse: collapse;
     }
     .idtext { width: 50px}
-    .nametext {width : 80px}
-    .quantext { width : 70px}
-    .costtext {width : 50px}
+    .nametext {width : 150px}
+    .jobtitletext {width : 100px}
+    .workhourstext {width : 180px}
+    .emailtext {width : 250px}
+    .phonenumbertext {width : 120px}
+    .worksatstext {width : 120px}
+    .worksatastext {width : 120px}
     .addbut {display: block; margin:auto}
 </style>
 
@@ -35,7 +39,7 @@ require_once 'includes\dbh.inc.php';
                     <td>ID</td>
                     <td>Name</td>
                     <td>Job Title</td>
-                    <td>Work Hours</td>
+                    <td>Work Hours (Editable)</td>
                     <td>Email Address</td>
                     <td>Phone Number</td>
                     <td>Store Location</td>
@@ -52,14 +56,14 @@ require_once 'includes\dbh.inc.php';
                     echo '<form action="" method = "post"';
                     echo "<tr>";
                     echo '<td> <input type = "text" class = "idtext" value = "'.$row["E_ID"].'" name = "id'.$i.'" readonly /> </td>';
-                    echo '<td> <input type = "text" class = "nametext" value = "'.$row["E_Name"].'" name = "name'.$i.'" /> </td>';
-                    echo '<td> <input type = "text" class = "jobtitletext" value = "'.$row["E_JobTitle"].'" name = "job title'.$i.'" /> </td>';
+                    echo '<td> <input type = "text" class = "nametext" value = "'.$row["E_Name"].'" name = "name'.$i.'" readonly /> </td>';
+                    echo '<td> <input type = "text" class = "jobtitletext" value = "'.$row["E_JobTitle"].'" name = "job title'.$i.'" readonly /> </td>';
                     echo '<td> <input type = "text" class = "workhourstext" value = "'.$row["E_WorkHours"].'" name = "work hours'.$i.'" /> </td>';
-                    echo '<td> <input type = "text" class = "emailtext" value = "'.$row["E_Email"].'" name = "email'.$i.'" /> </td>';
-                    echo '<td> <input type = "text" class = "phonenumbertext" value = "'.$row["E_PhoneNumber"].'" name = "phone number'.$i.'" /> </td>';
-                    echo '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].'" name = "store location'.$i.'" /> </td>';
-                    echo '<td> <input type = "text" class = "worksatastext" value = "'.$row["E_WorksAtAS"].'" name = "animal section location'.$i.'" /> </td>';
-                    echo '<td>';
+                    echo '<td> <input type = "text" class = "emailtext" value = "'.$row["E_Email"].'" name = "email'.$i.'" readonly /> </td>';
+                    echo '<td> <input type = "text" class = "phonenumbertext" value = "'.$row["E_PhoneNumber"].'" name = "phone number'.$i.'" readonly /> </td>';
+                    echo '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].'" name = "store location'.$i.'" readonly /> </td>';
+                    echo '<td> <input type = "text" class = "worksatastext" value = "'.$row["E_WorksAtAS"].'" name = "animal section location'.$i.'" readonly /> </td>';
+                    /*echo '<td>';
                     echo '<input type = "submit" value ="Update" name = "up_row'.$i.'" />';
                     
                     if (isset($_POST['up_row'.$i.''])) {
@@ -92,12 +96,12 @@ require_once 'includes\dbh.inc.php';
                         }
                     }
                 
-                echo '</td>';
+                echo '</td>';*/
                 echo "</tr>";
                 echo '</form>';
                 $i++;
             }
-            echo '<form action="" method = "post"';
+            /*echo '<form action="" method = "post"';
             echo "<tr>";
             echo '<td> <input type = "text" class = "idtext" name = "newID" readonly /> </td>';
             echo '<td> <input type = "text" class = "nametext" name = "newName" /> </td>';
@@ -130,9 +134,9 @@ require_once 'includes\dbh.inc.php';
             }
             echo '</td>';
             echo '</tr>';
-            echo '</form>';
+            echo '</form>';*/
         }
-          else { //If no rows in DB only allow to add
+          /*else { //If no rows in DB only allow to add
             echo '<form action="" method = "post"';
             echo "<tr>";
             echo '<td> <input type = "text" class = "idtext" name = "newID" readonly /> </td>';
@@ -167,7 +171,7 @@ require_once 'includes\dbh.inc.php';
             echo '</td>';
             echo '</tr>';
             echo '</form>';
-          }
+          }*/
         ?>
         </table>
     </section>
