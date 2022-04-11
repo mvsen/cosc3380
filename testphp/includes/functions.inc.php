@@ -225,11 +225,29 @@ function createUserEmployee($conn, $name, $email, $username, $pwd)
         header("location: ../staff.php?error=stmt2failed");
         exit();
 
+<<<<<<< HEAD
     }
 
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
     $rank = "employee";
     mysqli_stmt_bind_param($stmt, "sssss", $name, $email, $username, $hashedPwd, $rank);
+=======
+}
+
+function createUserEmployee($conn, $name, $email, $username, $pwd)
+{
+    $sql = "INSERT into ZOOSchema.users (usersName, usersEmail, usersUid, usersPwd) VALUES (?,?,?,?);";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../staff.php?error=stmt2failed");
+        exit();
+
+    }
+
+    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hashedPwd);
+>>>>>>> f6dfb3e5e233a653a6a8377a77429e12d1ee972a
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
@@ -269,7 +287,11 @@ function emptyInputEmployee($name,$birthday,$gender, $email, $phone_number, $add
 {
     $result;
 
+<<<<<<< HEAD
     if (empty($name) || empty($birthday) || empty($gender) || empty($email) || empty($phone_number) || empty($address) || empty($username) || empty($pwd) || empty($pwdrepeat) || empty($wage) || empty($job_title) || empty($workHours) || empty($department) || empty($worksAt))
+=======
+    if (empty($name) || empty($birthday) || empty($gender) || empty($email) || empty($phone_number) || empty($address) || empty($username) || empty($pwd) || empty($pwdrepeat) || empty($wage) || empty($job_title) || empty($$workHours) || empty($department) || empty($worksAt))
+>>>>>>> f6dfb3e5e233a653a6a8377a77429e12d1ee972a
     {
         $result = true;
     }
@@ -287,3 +309,9 @@ function invalidBDay($birthday) {
     else{$result = true;}
     return $result;
 }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> f6dfb3e5e233a653a6a8377a77429e12d1ee972a
