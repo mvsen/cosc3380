@@ -113,7 +113,32 @@ function createUser($conn, $name, $email, $username, $pwd)
 
 
 }
+function updateHours($conn, $department, $id, $hours, $day)
+{
+    $sql = "INSERT into ZOOSchema.Hours (hours, Date, E_Id, D_Name) VALUES (?,?,?,?);";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../profile.php?error=stmt2failed");
+        exit();
 
+    }
+
+
+    mysqli_stmt_bind_param($stmt, "isss", $hours, $day, $id, $department);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+
+
+    header("location: ../profile.php?error=none2");
+    exit();
+
+
+
+
+}
 
 function updateUser($conn, $name, $email, $username, $pwd, $id)
 {
@@ -137,9 +162,15 @@ function updateUser($conn, $name, $email, $username, $pwd, $id)
 
     mysqli_stmt_close($stmt);
 
+    session_start();
+    session_unset();
+    session_destroy();
+
+    header("location: ../login.php");
 
 
-    header("location: ../profile.php?error=okay");
+
+    //header("location: ../profile.php?error=okay");
     exit();
 
 

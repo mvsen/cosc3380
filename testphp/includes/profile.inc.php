@@ -1,6 +1,8 @@
 <?php
 
-if(isset($_POST["submit"]))
+
+
+if(isset($_POST["update"]))
 {
     $name = $_POST["name"];
     $email = $_POST["email"];
@@ -8,6 +10,8 @@ if(isset($_POST["submit"]))
     $pwd = $_POST["pwd"];
     $pwdrepeat = $_POST["pwdrepeat"];
     $id = $_POST["id"];
+
+
 
 
 
@@ -30,3 +34,4 @@ else {
     header("location: ../profile.php?error=none");
     exit();
 }
+
