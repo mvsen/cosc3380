@@ -1,67 +1,97 @@
 <?php
+include_once 'header.php'
 
-if (isset($_POST["submit"]))
+
+?>
+
+<section class ="index-intro">
+        <?php
+        
+                    if (isset($_SESSION["useruid"]))
+                    {
+                        echo "<p> Hello there " . $_SESSION['useruid'] . "</p>";
+                    }
+                    ?>
+        <h1> This is a Staff page </h1>
+        <section class ="add-employee-form">
+            <h2> Add an Employee</h2>
+            <div class="add-employee-form-form">
+            <form action="includes/staff.inc.php" method="post" >
+                <input type="text" name="name" placeholder="Full name..." style="height:50px; width:150px;">
+                <input type="date" name="birthday" placeholder="DOB YYYY-MM-DD" min="1901-01-01" style="height:50px; width:150px;">
+                <select name="gender" id="gender" style="height:50px; width:150px;">
+                <option value=''>Gender</option>
+                   <option value="Female">Female</option>
+                   <option value="Male">Male</option>
+                </select>
+                <input type="tel" id="phone" name="phone" placeholder="Phone Number XXX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" style="height:50px; width:150px;">
+                <input type="text" name="address" placeholder="Street, City, State, Zipcode" style="height:50px; width:150px;">
+                <p> Create Account for Employee </p>
+                <input type="text" name="email" placeholder="email..." style="height:50px; width:150px;">
+                <input type="text" name="uid" placeholder="Username..." style="height:50px; width:150px;">
+                <input type="password" name="pwd" placeholder="Password..." style="height:50px; width:150px;">
+                <input type="password" name="pwdrepeat" placeholder="Repeat Password..." style="height:50px; width:150px;">
+                <p> Job Description </p>                
+                <input type="text" name="wage" placeholder="Wage ($/hr)" style="height:50px; width:150px;">
+                <input type="text" name="job_title" placeholder="Job Title" style="height:50px; width:150px;">
+                <input type="text" name="workHours" placeholder="Work Hours" style="height:50px; width:150px;">
+                <input type="text" name="department" placeholder="Department" style="height:50px; width:150px;">
+                <input type="text" name="worksAt" placeholder="Works at" style="height:50px; width:150px;">
+                <button type="submit" name="submit"> Add Employee </button>
+
+            </form>
+            </div>
+            <?php
+
+if (isset($_GET["error"]))
 {
-    $name = $_POST["name"];
-    $birthday = $_POST["birthday"];
-    $gender = $_POST["gender"];
-    $email = $_POST["email"];
-    $phone_number = $_POST["phone_number"];
-    $address = $_POST["address"];
-    $username = $_POST["uid"];
-    $pwd = $_POST["pwd"];
-    $pwdrepeat = $_POST["pwdrepeat"];
-    $wage = $_POST["wage"];
-    $job_title = $_POST["job_title"];
-    $workHours = $_POST["workHours"];
-    $department = $_POST["department"];
-    $worksAt = $_POST["worksAt"];
-
-
-    require_once 'dbh.inc.php';
-    require_once 'functions.inc.php';
-
-    if (emptyInputEmployee($name,$birthday,$gender, $email, $phone_number, $address, $username, $pwd, $pwdrepeat, $wage, $job_title, $workHours, $department, $worksAt) !== false)
+    if($_GET["error"] == "emptyinput")
     {
-        header("location: ../staff.php?error=emptyinput");
-        exit();
+       echo "<p>Fill in all fields!</p>";
     }
-
-    if (invalidUid($username) !== false)
+    else if ($_GET["error"] == "invaliduid")
     {
-        header("location: ../staff.php?error=invaliduid");
-        exit();
+       echo "<p>Choose a proper username!</p>";
     }
-    if (invalidEmail($email) !== false)
+    else if ($_GET["error"] == "invalidemail")
     {
-        header("location: ../staff.php?error=invalidemail");
-        exit();
+       echo "<p>Choose a proper email!</p>";
     }
-    if (pwdMatch($pwd, $pwdrepeat) !== false)
+    else if ($_GET["error"] == "passwordsdontmatch")
     {
-        header("location: ../staff.php?error=passwordsdontmatch");
-        exit();
+       echo "<p>Make sure passwords match!!</p>";
     }
-    if (uidExists($conn, $username, $email) !== false)
+    else if ($_GET["error"] == "smtm1failed")
     {
-        header("location: ../staff.php?error=usernametaken");
-        exit();
+       echo "<p>Something went wrong, try again.</p>";
     }
-    if(invalidBDay($birthday) !== false) {
-        header("location: ../staff.php?error=invalidBDay");
-    }
-    if(isValidTelephoneNumber($phone_number) == false)
+    else if ($_GET["error"] == "smtm2failed")
     {
-        header("location: ../staff.php?error=invalidphonenumber");
+       echo "<p>Something went wrong, try again.</p>";
+    }
+    else if ($_GET["error"] == "usernametaken")
+    {
+       echo "<p>Username already taken. Try something else.</p>";
+    }
+    else if ($_GET["error"] == "invalidBDay")
+    {
+       echo "<p>Invalid birthday. Try again.</p>";
+    }
+    else if ($_GET["error"] == "none")
+    {
+       echo "<p>You have succesfully signed the employee up!</p>";
     }
     
-
-    createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt,$username,$pwd);
+}
     
 
-}
-else {
-    header("location: ../staff.php?error=none");
-    exit();
-}
+        ?>
+   
+            <p> Request Information about the employees </p>
+        </section>
+         
 
+        <?php
+include_once 'footer.php'
+
+?>
