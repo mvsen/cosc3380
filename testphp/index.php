@@ -10,6 +10,7 @@ include_once 'header.php'
                     if (isset($_SESSION["useruid"]))
                     {
                         echo "<h3> Hello there " . $_SESSION['useruid'] . "</h3>";
+                        echo "<h3> Hello there " . $_SESSION['userR'] . "</h3>";
                         
                     }
 

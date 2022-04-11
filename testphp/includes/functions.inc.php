@@ -115,6 +115,39 @@ function createUser($conn, $name, $email, $username, $pwd)
 }
 
 
+function updateUser($conn, $name, $email, $username, $pwd, $id)
+{
+
+
+
+
+    $sql = "UPDATE ZOOSchema.users SET usersName =?, usersEmail = ?, usersUid = ?, usersPwd=? WHERE usersID = ?;";
+
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../profile.php?error=stmt2failed");
+        exit();
+
+    }
+
+    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+    mysqli_stmt_bind_param($stmt, "ssssi", $name, $email, $username, $hashedPwd, $id);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+
+
+    header("location: ../profile.php?error=okay");
+    exit();
+
+
+
+
+}
+
+
 
 
 
