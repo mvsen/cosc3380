@@ -35,23 +35,6 @@ require_once 'includes\dbh.inc.php';
             <h1> Schedule Page</h1>
             <p> See what employees, from each respective department, is currently on the schedule. Edit pre-existing employees' work hours to accomodate for the Zoo's needs.</p>
             <br>
-            <p> Work Hours are made up of TWO parts: (Work Days):(Work Shift(Hours))</p>
-            <br>
-            <p> Work Days: </p>
-            <ul> 
-                <li> Sunday - Thursday (Su-Th)</li>
-                <li> Wednesday - Sunday (W-Su)</li>
-                <li> Friday - Tuesday (F-T)</li>
-            </ul>
-            <br>
-            <p> Work Shifts: </p>
-            <ul>
-                <li> Open (6am-2pm)</li>
-                <li> Mid (12pm-8pm)</li>
-                <li> Close (6pm-2pm)</li>
-                <li> Night (12am - 8am)</li>
-            </ul>
-            <br>
         <p> Department Schedule - ANIMAL CARE </p>
             <table>
                 <tr>
@@ -256,6 +239,7 @@ require_once 'includes\dbh.inc.php';
                     echo '</td>';
                     echo "</tr>";
                     echo '</form>';
+                    //$i++;
             }
         }
         ?>
@@ -317,6 +301,7 @@ require_once 'includes\dbh.inc.php';
                     echo '</td>';
                     echo "</tr>";
                     echo '</form>';
+                    //$i++;
             }
             
         }
@@ -380,6 +365,7 @@ require_once 'includes\dbh.inc.php';
                     echo '</td>';
                     echo "</tr>";
                     echo '</form>';
+                    //$i++;
             }
         }
         ?>
@@ -442,10 +428,29 @@ require_once 'includes\dbh.inc.php';
                     echo '</td>';
                     echo "</tr>";
                     echo '</form>';
+                    //$i++;
+                    
             }
         }
         ?>
         </table>
+
+        <br>
+        <p> Work Hours are made up of TWO parts: (Work Days):(Work Shift(Hours))</p>
+            <p> Work Days: </p>
+            <ul> 
+                <li> Sunday - Thursday (Su-Th)</li>
+                <li> Wednesday - Sunday (W-Su)</li>
+                <li> Friday - Tuesday (F-T)</li>
+            </ul>
+            <p> Work Shifts: </p>
+            <ul>
+                <li> Open (6am-2pm)</li>
+                <li> Mid (12pm-8pm)</li>
+                <li> Close (6pm-2pm)</li>
+                <li> Night (12am - 8am)</li>
+            </ul>
+            <br>
 
     </section>
     
