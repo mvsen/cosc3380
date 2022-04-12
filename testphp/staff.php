@@ -1,6 +1,7 @@
 <?php
 include_once 'header.php'
 
+<<<<<<< HEAD
 ?>
 
 <section class ="index-intro">
@@ -12,6 +13,21 @@ include_once 'header.php'
                     }
                     ?>
         <h1> This is a Staff page </h1>
+=======
+
+?>
+
+<section class ="index-intro">
+ 
+
+   
+       
+        </section>
+         
+
+
+
+>>>>>>> Jeffery
         <section class ="add-employee-form">
             <h2> Add an Employee</h2>
             <div class="add-employee-form-form">
@@ -20,10 +36,10 @@ include_once 'header.php'
                 <input type="date" name="birthday" placeholder="DOB YYYY-MM-DD" min="1901-01-01" style="height:50px; width:150px;">
                 <select name="gender" id="gender" style="height:50px; width:150px;">
                 <option value=''>Gender</option>
-                   <option value="Female">Female</option>
-                   <option value="Male">Male</option>
+                   <option name="gender">Female</option>
+                   <option name="gender">Male</option>
                 </select>
-                <input type="tel" id="phone" name="phone" placeholder="Phone Number XXX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" style="height:50px; width:150px;">
+                <input type="tel" id="phone" name="phone_number" placeholder="Phone Number XXX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" style="height:50px; width:150px;">
                 <input type="text" name="address" placeholder="Street, City, State, Zipcode" style="height:50px; width:150px;">
                 <p> Create Account for Employee </p>
                 <input type="text" name="email" placeholder="email..." style="height:50px; width:150px;">
@@ -36,17 +52,8 @@ include_once 'header.php'
                 <input type="text" name="workHours" placeholder="Work Hours" style="height:50px; width:150px;">
                 <!--getting department names from mysql department-->
 
-                <select name="department" id="department" placeholder="Department" style="height:50px; width:150px;">
-                    <option value=''>Select Department</option>
-                    <?php
-                    $dNameRow=mysqli_query($conn,"select D_Name from ZOOSchema.Departments");
-                    while ($row = mysqli_fetch_array($dNameRow)) {
-                       $name = $row['name'];
-                       ?>
-                       <option value='<?php echo $name; ?>'></option>
-                    <?php } ?>
-                  </select>
-                <!--<input type="text" name="department" placeholder="Department" style="height:50px; width:150px;">-->
+    
+                <input type="text" name="department" placeholder="Department" style="height:50px; width:150px;">
                 <input type="text" name="worksAt" placeholder="Works at" style="height:50px; width:150px;">
                 <button type="submit" name="submit"> Add Employee </button>
 
@@ -98,11 +105,22 @@ if (isset($_GET["error"]))
 
         ?>
    
-            <p> Request Information about the employees </p>
         </section>
+<<<<<<< HEAD
          
+=======
+   
+        </section>
+
+
+
+>>>>>>> Jeffery
 
         <?php
 include_once 'footer.php'
 
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> Jeffery
