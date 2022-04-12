@@ -132,7 +132,7 @@ function updateHours($conn, $department, $id, $hours, $day)
 
 
 
-    header("location: ../profile.php?error=none2");
+    header("location: ../profile.php?error=none21");
     exit();
 
 
