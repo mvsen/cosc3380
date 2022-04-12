@@ -83,7 +83,7 @@ require_once 'includes\dbh.inc.php';
                     echo '</td>';
                     echo "</tr>";
                     echo '</form>';
-                    $i++;
+                    //$i++;
                 }
                 echo '<form action="" method = "post"';
                 echo "<tr>";
