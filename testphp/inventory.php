@@ -1,7 +1,13 @@
 <?php
 include_once 'header.php';
-require_once 'includes\dbh.inc.php';
-
+$serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+$dBUsername = "admin";
+$dBPassword = "cosc3380";
+$dBname = "ZOOSchema";
+$conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+if(!$conn){
+    die("connection failed: " . mysqli_connect_error());
+}
 ?>
 
 <style>
@@ -83,7 +89,7 @@ require_once 'includes\dbh.inc.php';
                     echo '</td>';
                     echo "</tr>";
                     echo '</form>';
-                    $i++;
+                    //$i++;
                 }
                 echo '<form action="" method = "post"';
                 echo "<tr>";
