@@ -119,6 +119,35 @@ function updateHours($conn, $department, $id, $hours, $day)
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql))
     {
+        header("location: ../profilea.php?error=stmt2failed");
+        exit();
+
+    }
+
+
+    mysqli_stmt_bind_param($stmt, "isss", $hours, $day, $id, $department);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+
+
+    header("location: ../profilea.php?error=none21");
+    exit();
+
+
+
+
+}
+
+function modifyHours($conn, $department, $id, $hours, $day)
+{
+
+    $sql = "UPDATE ZOOSchema.users SET usersName =?, usersEmail = ?, usersUid = ?, usersPwd=? WHERE usersID = ?;";
+    $sql = "UPDATE ZOOSchema.Hours SET hours = ?, Date = ?, D_Name = ? WHERE E_Id = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql))
+    {
         header("location: ../profile.php?error=stmt2failed");
         exit();
 
@@ -133,6 +162,33 @@ function updateHours($conn, $department, $id, $hours, $day)
 
 
     header("location: ../profile.php?error=none21");
+    exit();
+
+
+
+
+}
+
+function deleteHours($conn, $department, $id, $day)
+{
+    $sql = "DELETE FROM ZOOSchema.Hours WHERE E_Id = ? and Date = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../profilea.php?error=stmt2failed");
+        exit();
+
+    }
+
+
+    mysqli_stmt_bind_param($stmt, "is", $id, $day);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+
+
+    header("location: ../profilea.php?error=none5");
     exit();
 
 

@@ -119,7 +119,7 @@ nav a:hover::before {
                         }
                         else{
                           
-
+                            echo '<li><a href ="profilea.php">Profile Page</a><li>';
                             echo '<li><a href ="staff.php">Staff</a><li>';
                             echo '<li><a href ="schedule.php">Schedule</a><li>';
                             echo '<li><a href ="inventory.php">Inventory</a><li>';

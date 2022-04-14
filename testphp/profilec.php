@@ -41,12 +41,12 @@ include_once 'header.php'
                         //print_r($row);
                         $newid = $row['usersId'];
                     ?>
-                        <input type="text" name = id value="<?php echo $row['usersId']; ?>" placeholder="<?php echo $row['usersId']; ?>" readonly>
-                <input type="text" name="name" placeholder="Full name...">
-                <input type="text" name="email" placeholder="email...">
-                <input type="text" name="uid" placeholder="Username...">
-                <input type="password" name="pwd" placeholder="Password...">
-                <input type="password" name="pwdrepeat" placeholder="Repeat Password...">
+                        User ID:<input type="text" name = id value="<?php echo $row['usersId']; ?>" placeholder="<?php echo $row['usersId']; ?>" readonly>
+                Full Name:<input type="text" name="name" placeholder="Full name...">
+                Email: <input type="text" name="email" placeholder="email...">
+                Username: <input type="text" name="uid" placeholder="Username...">
+                Password: <input type="password" name="pwd" placeholder="Password...">
+                Repeat Password:<input type="password" name="pwdrepeat" placeholder="Repeat Password...">
                 <button type="submit" name="update"> Update </button>
 
             </form>

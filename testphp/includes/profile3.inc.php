@@ -2,11 +2,10 @@
 
 
 
-if(isset($_POST["submit2"]))
+if(isset($_POST["submit5"]))
 {
     $department = $_POST["department2"];
     $id = $_POST["id"];
-    $hours = $_POST["hours"];
     $day = $_POST["day"];
 
 
@@ -19,9 +18,9 @@ if(isset($_POST["submit2"]))
     require_once 'functions.inc.php';
 
 
-    updateHours($conn, $department, $id, $hours, $day);
+    deleteHours($conn, $department, $id, $day);
 }
 else {
-    header("location: ../profilea.php?error=none1");
+    header("location: ../profilea.php?error=none4");
     exit();
 }

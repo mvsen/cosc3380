@@ -153,6 +153,11 @@ row:before, .row:after {
 
         </section>
 
+        <section>
+        <p>Cart<span class='cart-counter'>1</span></p>
+<div class='addtocart'>addtocart</div>
+        </section>
+
 
         <?php
 include_once 'footer.php'
