@@ -1,61 +1,81 @@
 <?php
-include_once 'header.php'
-
+include_once 'header.php';
 
 ?>
 
+
 <section class ="index-intro">
-        <?php
+   <h1> This is a Staff page </h1>
+      <h2> Add an Employee</h2>
+      <div class="add-employee-form-form">
+      <form action="includes/staff.inc.php" method="post" >
+         <input type="text" name="name" placeholder="Full name..." style="height:50px; width:150px;">
+         <input type="date" name="birthday" placeholder="DOB YYYY-MM-DD" min="1901-01-01" style="height:50px; width:150px;">
+         <select name="gender" id="gender" style="height:50px; width:150px;">
+            <option value=''>Gender</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+         </select>
+         <input type="tel" id="phone" name="phone" placeholder="Phone Number XXX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" style="height:50px; width:150px;">
+         <input type="text" name="address" placeholder="Street, City, State, Zipcode" style="height:50px; width:150px;">
+         <p> Create Account for Employee </p>
+         <input type="text" name="email" placeholder="email..." style="height:50px; width:150px;">
+         <input type="text" name="uid" placeholder="Username..." style="height:50px; width:150px;">
+         <input type="password" name="pwd" placeholder="Password..." style="height:50px; width:150px;">
+         <input type="password" name="pwdrepeat" placeholder="Repeat Password..." style="height:50px; width:150px;">
+         <p> Job Description </p>                
+         <input type="text" name="wage" placeholder="Wage ($/hr)" style="height:50px; width:150px;">
+         <input type="text" name="job_title" placeholder="Job Title" style="height:50px; width:150px;">
+         <input type="text" name="workHours" placeholder="Work Hours" style="height:50px; width:150px;">
+               
+<?php
+         $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+         $dBUsername = "admin";
+         $dBPassword = "cosc3380";
+         $dBname = "ZOOSchema";
+         $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+         $sql = "SELECT * FROM ZOOSchema.Departments;";
+         $stmt = mysqli_stmt_init($conn);
+         if (!mysqli_stmt_prepare($stmt, $sql)) {
+            header("location: ../staff.php?error=stmt1failed");
+            exit();
+         }
+         mysqli_stmt_execute($stmt);
+         $result = mysqli_stmt_get_result($stmt);
+         echo "<select name='department'>";
+         echo "<option value=''>Select a Department</option>";
+         while($row = mysqli_fetch_array($result)){
+            echo "<option value='" . $row['D_Name'] ."'>" . $row['D_Name'] ."</option>";
+         }
+         echo "</select>";
+?> 
+<?php
+         $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+         $dBUsername = "admin";
+         $dBPassword = "cosc3380";
+         $dBname = "ZOOSchema";
+         $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+         $sql = "SELECT * FROM ZOOSchema.Departments;";
+         $stmt = mysqli_stmt_init($conn);
+         if (!mysqli_stmt_prepare($stmt, $sql)) {
+            header("location: ../staff.php?error=stmt1failed");
+            exit();
+         }
+         mysqli_stmt_execute($stmt);
+         $result = mysqli_stmt_get_result($stmt);
+         echo "<select name='worksat'>";
+         echo "<option value=''>Select a Location</option>";
+         while($row = mysqli_fetch_array($result)){
+            echo "<option value='" . $row['D_Location'] ."'>" . $row['D_Location'] ."</option>";
+         }
+         echo "</select>";
+?> 
+         <input type="text" name="worksAt" placeholder="Works at" style="height:50px; width:150px;">
+         <button type="submit" name="submit"> Add Employee </button>
 
-        
-                    if (isset($_SESSION["useruid"]))
-                    {
-                        echo "<p> Hello there " . $_SESSION['useruid'] . "</p>";
-                    }
-                    ?>
-        <h1> This is a Staff page </h1>
-        <section class ="add-employee-form">
-            <h2> Add an Employee</h2>
-            <div class="add-employee-form-form">
-            <form action="includes/staff.inc.php" method="post" >
-                <input type="text" name="name" placeholder="Full name..." style="height:50px; width:150px;">
-                <input type="date" name="birthday" placeholder="DOB YYYY-MM-DD" min="1901-01-01" style="height:50px; width:150px;">
-                <select name="gender" id="gender" style="height:50px; width:150px;">
-                <option value=''>Gender</option>
-                   <option value="Female">Female</option>
-                   <option value="Male">Male</option>
-                </select>
-                <input type="tel" id="phone" name="phone" placeholder="Phone Number XXX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" style="height:50px; width:150px;">
-                <input type="text" name="address" placeholder="Street, City, State, Zipcode" style="height:50px; width:150px;">
-                <p> Create Account for Employee </p>
-                <input type="text" name="email" placeholder="email..." style="height:50px; width:150px;">
-                <input type="text" name="uid" placeholder="Username..." style="height:50px; width:150px;">
-                <input type="password" name="pwd" placeholder="Password..." style="height:50px; width:150px;">
-                <input type="password" name="pwdrepeat" placeholder="Repeat Password..." style="height:50px; width:150px;">
-                <p> Job Description </p>                
-                <input type="text" name="wage" placeholder="Wage ($/hr)" style="height:50px; width:150px;">
-                <input type="text" name="job_title" placeholder="Job Title" style="height:50px; width:150px;">
-                <input type="text" name="workHours" placeholder="Work Hours" style="height:50px; width:150px;">
-                <!--getting department names from mysql department-->
-
-                <select name="department" id="department" placeholder="Department" style="height:50px; width:150px;">
-                    <option value=''>Select Department</option>
-                    <?php
-                    $dNameRow=mysqli_query($conn,"select D_Name from ZOOSchema.Departments");
-                    while ($row = mysqli_fetch_array($dNameRow)) {
-                       $name = $row['name'];
-                       ?>
-                       <option value='<?php echo $name; ?>'></option>
-                    <?php } ?>
-                  </select>
-                <!--<input type="text" name="department" placeholder="Department" style="height:50px; width:150px;">-->
-                <input type="text" name="worksAt" placeholder="Works at" style="height:50px; width:150px;">
-                <button type="submit" name="submit"> Add Employee </button>
-
-            </form>
-            </div>
-            <?php
-
+      </form>
+      </div>
+<?php
 if (isset($_GET["error"]))
 {
     if($_GET["error"] == "emptyinput")
@@ -95,34 +115,197 @@ if (isset($_GET["error"]))
        echo "<p>You have succesfully signed the employee up!</p>";
     }
     
-}
-    
+}    
+?> 
 
-        ?>
-   
-            <p> Request Information about the employees </p>
-        </section>
-         
+<html>
+      <div class="container">
+         <h3>Request Information about the Employees</h3>
+         <div class="row">
+            <form class="form-horizontal" action="staff.php" method="post">
+               <div class="form-group">
+                  <label class="col-lg-2 control-label">Name</label>
+                  <div class="col-lg-4">
+                     <input type="text" class="form-control" name="Name">
+                  </div>
+               </div>
 
-                    if (isset($_SESSION["useruid"]))
-                    {
-                        echo "<p> Hello there " . $_SESSION['useruid'] . "</p>";
-                        
-                    }
+               <div class="form-group">
+                  <label class="col-lg-2 control-label">Gender</label>
+                     <div class="col-lg-4">
+                        <select name="Gender">
+                           <option value="">Select a Gender</option>
+                           <option value='Female'>Female</option>
+                           <option value='Male'>Male</option>
+                        </select>
+                     </div>
+               </div>
+               
+               <div class="form-group">
+                  <label class="col-lg-2 control-label">Birthday Month</label>
+                  <div class="col-lg-4">
+                  <input type="number" name="Month"  min="1" max="12" class="form-control">
+                  </div>
+               </div>
 
-
-
-        ?>
-
+               <div class="form-group">
+                  <label class="col-lg-2 control-label">Department</label>
+                     <div class="col-lg-4">
+<?php
+                $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+                $dBUsername = "admin";
+                $dBPassword = "cosc3380";
+                $dBname = "ZOOSchema";
+                $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+                $sql = "SELECT * FROM ZOOSchema.Departments;";
+                $stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql))
+                {
+                header("location: ../staff.php?error=stmt1failed");
+                exit();
+                }
+                mysqli_stmt_execute($stmt);
         
+                $result = mysqli_stmt_get_result($stmt);
+                     echo "<select name='Department'>";
+                     echo "<option value=''>Select a Department</option>";
+                        while($row = mysqli_fetch_array($result)){
+         
+                        echo "<option value='" . $row['D_Name'] ."'>" . $row['D_Name'] ."</option>";
+                     }
+                     echo "</select>";
+?>
+                     </div>
+               </div>
 
-            <h1> This is a Staff page</h1>
-            <p> Here is some importnat information </p>
-        </section>
 
+               <div class="form-group">
+                  <label class="col-lg-2 control-label">Works At</label>
+                     <div class="col-lg-4">
+<?php
+                     $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+                     $dBUsername = "admin";
+                     $dBPassword = "cosc3380";
+                     $dBname = "ZOOSchema";
+                     $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+                     $sql = "SELECT * FROM ZOOSchema.Employees;";
+                     $stmt = mysqli_stmt_init($conn);
+                     if (!mysqli_stmt_prepare($stmt, $sql)){
+                     header("location: ../staff.php?error=stmt1failed");
+                     exit();
+                     }
+                     mysqli_stmt_execute($stmt);
+        
+                     $result = mysqli_stmt_get_result($stmt);
+                     echo "<select name='WorksAt'>";
+                     echo "<option value=''>Select a Location</option>";
+                     while($row = mysqli_fetch_array($result)){
+                        echo "<option value='" . $row['E_Location'] ."'>" . $row['E_Location'] ."</option>";
+                     }
+                     echo "</select>";
+?>
+                     </div>
+               </div>
 
+               <div class="form-group">
+                  <label class="col-lg-2 control-label"></label>
+                     <div class="col-lg-4">
+                     <input type="submit" name="Submit" class="form-control">
+                     </div>
+               </div> 
 
-        <?php
-include_once 'footer.php'
+            </form>
+         </div>
 
+            <div class="row">
+               <table class="table table-striped table-hover">
+                  <thread>
+                     <tr>
+                        <th>ID</th>
+                        <th>Employee Name</th>
+                        <th>Gender</th>
+                        <th>Birthday</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Works At</th>
+                     </tr>
+                  </thread>
+               </table>
+               <tbody>
+<?php
+               $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+               $dBUsername = "admin";
+               $dBPassword = "cosc3380";
+               $dBname = "ZOOSchema";
+               $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+                  if(isset($_POST['Submit'])) {
+                     
+                     $Name = $_POST['Name'];
+                     $Gender = $_POST['Gender'];
+                     $Month = $_POST['Month'];
+                     $Department = $_POST['Department'];
+                     $WorksAt = $_POST['WorksAt'];
+                     
+                     if($Name != "" || $Gender !="" || $Month != "" || $Department != "" || $WorksAt != "") {
+                        
+                        $query = "SELECT * FROM ZOOSchema.Employees WHERE E_Name ='$Name' OR E_Gender = '$Gender' OR MONTH(E_Birthday)='$Month'  OR E_Department = '$Department' OR E_Location = '$WorksAt'";
+                        $data = mysqli_query($conn, $query) or die('error');
+                        
+                        //$stmt = mysqli_stmt_init($conn);
+                        //if (!mysqli_stmt_prepare($stmt, $query)){
+                           //header("location: ../staff.php?error=stmt1failed");
+                          // exit();
+                        //}
+                        //mysqli_stmt_bind_param($stmt, "sssss", $Name, $Gender, $Month, $Department, $WorksAt);
+                        //mysqli_stmt_execute($stmt);
 
+                        //$result = mysqli_stmt_get_result($stmt);
+
+                        //$count = mysqli_num_rows($result);
+
+                        if(mysqli_num_rows($data) > 0 ) {
+                           while($row = mysqli_fetch_assoc($data)) {
+                              echo "here";
+                              $ID = $row['E_ID'];
+                              $Name = $row['Name'];
+                              $Gender = $row['E_Gender'];
+                              $Month = $row['E_Birthday'];
+                              $pnumber = $row['E_PhoneNumber'];
+                              $Email = $row['E_Email'];
+                              $Department = $row['E_Department'];
+                              $WorksAt = $row['E_Location'];
+?>
+                              <tr>
+                                 <td><?php echo $ID;?></td>
+                                 <td><?php echo $Name;?></td>
+                                 <td><?php echo $Gender;?></td>
+                                 <td><?php echo $Month;?></td>
+                                 <td><?php echo $pnumber;?></td>
+                                 <td><?php echo $Email;?></td>
+                                 <td><?php echo $Department;?></td>
+                                 <td><?php echo $WorksAt;?></td>
+                              </tr>
+<?php
+                            }
+                        }
+                        else {
+?>
+                           <tr>
+                              <td>'Records Not Found!'</td>;
+                           </tr>
+<?php
+                        }
+                     }
+                  }
+?>
+               </tbody>
+         </div>
+      </div>
+               </body>
+               </section>
+               </html>  
+               </section>
+<?php
+include_once 'footer.php';
+?>
