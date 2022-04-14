@@ -3,7 +3,7 @@ include_once 'header.php';
 
 ?>
 
-
+<?php error_reporting (E_ALL ^ E_NOTICE); ?> 
 <section class ="index-intro">
    <h1> This is a Staff page </h1>
       <h2> Add an Employee</h2>
@@ -249,7 +249,7 @@ if (isset($_GET["error"]))
                      
                      if($Name != "" || $Gender !="" || $Month != "" || $Department != "" || $WorksAt != "") {
                         
-                        $query = "SELECT * FROM ZOOSchema.Employees WHERE E_Name ='$Name' OR E_Gender = '$Gender' OR MONTH(E_Birthday)='$Month'  OR E_Department = '$Department' OR E_Location = '$WorksAt'";
+                        $query = "SELECT * FROM ZOOSchema.Employees WHERE E_Name ='$Name' OR E_Gender = '$Gender' OR MONTH(E_Birthdate)='$Month'  OR E_Department = '$Department' OR E_Location = '$WorksAt'";
                         $data = mysqli_query($conn, $query) or die('error');
                         
                         //$stmt = mysqli_stmt_init($conn);
@@ -266,25 +266,24 @@ if (isset($_GET["error"]))
 
                         if(mysqli_num_rows($data) > 0 ) {
                            while($row = mysqli_fetch_assoc($data)) {
-                              echo "here";
-                              $ID = $row['E_ID'];
-                              $Name = $row['Name'];
-                              $Gender = $row['E_Gender'];
-                              $Month = $row['E_Birthday'];
-                              $pnumber = $row['E_PhoneNumber'];
-                              $Email = $row['E_Email'];
-                              $Department = $row['E_Department'];
-                              $WorksAt = $row['E_Location'];
+                              $ID1 = $row['E_ID'];
+                              $Name1 = $row['Name'];
+                              $Gender1 = $row['E_Gender'];
+                              $Month1 = $row['E_Birthdate'];
+                              $pnumber1 = $row['E_PhoneNumber'];
+                              $Email1 = $row['E_Email'];
+                              $Department1 = $row['E_Department'];
+                              $WorksAt1 = $row['E_Location'];
 ?>
                               <tr>
-                                 <td><?php echo $ID;?></td>
-                                 <td><?php echo $Name;?></td>
-                                 <td><?php echo $Gender;?></td>
-                                 <td><?php echo $Month;?></td>
-                                 <td><?php echo $pnumber;?></td>
-                                 <td><?php echo $Email;?></td>
-                                 <td><?php echo $Department;?></td>
-                                 <td><?php echo $WorksAt;?></td>
+                                 <td><?php echo $ID1;?></td>
+                                 <td><?php echo $Name1;?></td>
+                                 <td><?php echo $Gender1;?></td>
+                                 <td><?php echo $Month1;?></td>
+                                 <td><?php echo $pnumber1;?></td>
+                                 <td><?php echo $Email1;?></td>
+                                 <td><?php echo $Department1;?></td>
+                                 <td><?php echo $WorksAt1;?></td>
                               </tr>
 <?php
                             }
