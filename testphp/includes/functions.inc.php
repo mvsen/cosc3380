@@ -328,8 +328,11 @@ function createUserEmployee($conn, $name, $email, $username, $pwd)
 
 }
 
-function createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt,$username,$pwd) {
-    $sql = "INSERT into ZOOSchema.Employees(E_Name, E_Birthdate, E_Gender, E_Email, E_Phonenumber, E_Address, E_Pay, E_JobTitle, E_WorkHours, E_Department, E_WorksAtS) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+
+
+function createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt) {
+    $sql = "INSERT into ZOOSchema.Employees(E_Name, E_Birthdate, E_Gender, E_Email, E_PhoneNumber, E_Address, E_Pay, E_JobTitle, E_WorkHours, E_Department, E_Location ) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+    
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql))
     {
@@ -344,13 +347,11 @@ function createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $
 
     mysqli_stmt_close($stmt);
 
-    createUserEmployee($conn, $name, $email, $username, $pwd);
 
     header("location: ../staff.php?error=none");
     exit();
 
 }
-
 
 function emptyInputEmployee($name,$birthday,$gender, $email, $phone_number, $address, $username, $pwd, $pwdrepeat, $wage, $job_title, $workHours, $department, $worksAt) 
 {
