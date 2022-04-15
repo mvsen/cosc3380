@@ -15,11 +15,11 @@ if(!$conn){
         border: 1px solid black;
         border-collapse: collapse;
     }
-    .nidtext {width : 150px}
-    .pidtext {width : 150px}
-    .counttext {width : 150px}
+    .nidtext {width : 100px}
+    .pidtext {width : 100px}
+    .counttext {width : 100px}
     .timetext {width : 150px}
-    .messagetext {width : 550px}
+    .messagetext {width : 700px}
     .addbut {display: block; margin:auto}
 </style>
 
@@ -73,7 +73,7 @@ if(!$conn){
                         echo "</td>";
                         echo "</tr>";
                         echo '</form>';
-                        $i++;
+                        //$i++;
                     }
                 }
                 ?>
