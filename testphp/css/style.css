@@ -27,11 +27,7 @@ html {
     box-sizing: inherit;
   }
   
-  body {
-    padding: 20px 30px;
-    max-width: 900px;
-    margin: 0 auto;
-  }
+
   
   /* Clearfixes */
   .row:before, .row:after {

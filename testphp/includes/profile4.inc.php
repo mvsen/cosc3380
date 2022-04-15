@@ -2,7 +2,7 @@
 
 
 
-if(isset($_POST["submit2"]))
+if(isset($_POST["submit4"]))
 {
     $department = $_POST["department2"];
     $id = $_POST["id"];
