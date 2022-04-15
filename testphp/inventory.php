@@ -9,17 +9,25 @@ if(!$conn){
     die("connection failed: " . mysqli_connect_error());
 }
 ?>
-
+<head>
+    <title>Inventory</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 <style>
     table, th, td {
         border: 1px solid black;
         border-collapse: collapse;
     }
     .idtext { width: 50px}
-    .nametext {width : 80px}
+    .nametext {width : 200px}
     .quantext { width : 70px}
     .costtext {width : 50px}
     .addbut {display: block; margin:auto}
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+    }
 </style>
 
 <section class ="index-intro">
@@ -29,14 +37,13 @@ if(!$conn){
                         echo "<p> Hello there " . $_SESSION['useruid'] . "</p>";
                         
                     }
-                    $i = 0
+                    $i = 0;
         ?>
 
         
 
-            <h1> This is a Inventory page</h1>
-            <p> Here is some importnat information </p>
-            <table>
+            <h1 style = 'text-align : center;'>Current Inventory</h1>
+            <table class = 'center'>
                 <tr>
                     <td>ID</td>
                     <td>Name</td>
