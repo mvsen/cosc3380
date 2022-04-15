@@ -15,14 +15,11 @@ if(!$conn){
         border: 1px solid black;
         border-collapse: collapse;
     }
-    .idtext { width: 60px}
-    .nametext {width : 180px}
-    .jobtitletext {width : 100px}
-    .workhourstext {width : 180px}
-    .emailtext {width : 200px}
-    .phonenumbertext {width : 120px}
-    .worksatstext {width : 180px}
-    .worksatastext {width : 180px}
+    .nidtext {width : 150px}
+    .pidtext {width : 150px}
+    .counttext {width : 150px}
+    .timetext {width : 150px}
+    .messagetext {width : 550px}
     .addbut {display: block; margin:auto}
 </style>
 
@@ -33,14 +30,54 @@ if(!$conn){
                 echo "<p> Hello there " . $_SESSION['useruid'] . "</p>";
                 
             }
-            $i = 0;
+            $i = 1;
         ?>
-
-        
 
             <h1> Notification Page</h1>
             <p> Database communications to supervisors of notable data modification events. </p>
             <br>
+
+            <p> Messages: </p>
+            <table>
+                <tr>
+                    <td>Notification ID</td>
+                    <td>Product ID</td>
+                    <td>Product Count</td>
+                    <td>Time</td>
+                    <td>Message</td>
+                </tr>
+
+                <?php
+                $sql = "SELECT * FROM Notifications";
+                $result = $conn->query($sql);
+                if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()) {
+                        echo '<form action="" method = "post"';
+                        echo "<tr>";
+                        echo '<td> <input type = "text" class = "nidtext" value = "'.$row["N_ID"].'" name = "nid'.$i.'" readonly /> </td>';
+                        echo '<td> <input type = "text" class = "pidtext" value = "'.$row["Product_ID"].'" name = "pid'.$i.'" readonly /> </td>';
+                        echo '<td> <input type = "text" class = "counttext" value = "'.$row["N_ProductCount"].'" name = "count'.$i.'" readonly /> </td>';
+                        echo '<td> <input type = "text" class = "timetext" value = "'.$row["N_Time"].'" name = "time'.$i.'" readonly /> </td>';
+                        echo '<td> <input type = "text" class = "messagetext" value = "'.$row["N_Message"].'" name = "message'.$i.'" readonly /> </td>';
+                        echo '<td>';
+                        echo '<input type = "submit" value = "Delete" name = "del_row'.$i.'" />';
+
+                        if (isset($_POST['del_row'.$i.''])) {
+                            $nID = $_POST['nid'.$i.''];
+                            $delete = "DELETE from Notifications WHERE N_ID = '$nID'";
+                            $qry = $conn -> query($delete);
+                            if ($qry === false) {echo "Failed Delete";} else {
+                                header ("location: notification.php");
+                            }
+                        }
+                        echo "</td>";
+                        echo "</tr>";
+                        echo '</form>';
+                        $i++;
+                    }
+                }
+                ?>
+            </table>
 
     <?php
 include_once 'footer.php'
