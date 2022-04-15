@@ -70,7 +70,7 @@ include_once 'header.php';
          }
          echo "</select>";
 ?> 
-         <input type="text" name="worksAt" placeholder="Works at" style="height:50px; width:150px;">
+         
          <button type="submit" name="submit"> Add Employee </button>
 
       </form>
@@ -252,18 +252,6 @@ if (isset($_GET["error"]))
                         $query = "SELECT * FROM ZOOSchema.Employees WHERE E_Name ='$Name' OR E_Gender = '$Gender' OR MONTH(E_Birthdate)='$Month'  OR E_Department = '$Department' OR E_Location = '$WorksAt'";
                         $data = mysqli_query($conn, $query) or die('error');
                         
-                        //$stmt = mysqli_stmt_init($conn);
-                        //if (!mysqli_stmt_prepare($stmt, $query)){
-                           //header("location: ../staff.php?error=stmt1failed");
-                          // exit();
-                        //}
-                        //mysqli_stmt_bind_param($stmt, "sssss", $Name, $Gender, $Month, $Department, $WorksAt);
-                        //mysqli_stmt_execute($stmt);
-
-                        //$result = mysqli_stmt_get_result($stmt);
-
-                        //$count = mysqli_num_rows($result);
-
                         if(mysqli_num_rows($data) > 0 ) {
                            while($row = mysqli_fetch_assoc($data)) {
                               $ID1 = $row['E_ID'];
