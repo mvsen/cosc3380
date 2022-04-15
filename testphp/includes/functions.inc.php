@@ -301,8 +301,11 @@ function loginUser($conn, $username, $pwd)
     
 
 }
+<<<<<<< HEAD
 }
 
+=======
+>>>>>>> origin/Thu
 function createUserEmployee($conn, $name, $email, $username, $pwd)
 {
     $sql = "INSERT into ZOOSchema.users (usersName, usersEmail, usersUid, usersPwd, usersRank) VALUES (?,?,?,?, ?);";
