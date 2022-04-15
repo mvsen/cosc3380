@@ -33,7 +33,7 @@ if(!$conn){
                 echo "<p> Hello there " . $_SESSION['useruid'] . "</p>";
                 
             }
-            $i = 0
+            $i = 0;
         ?>
 
         
@@ -68,19 +68,7 @@ if(!$conn){
                     echo '<td> <input type = "text" class = "workhourstext" value = "'.$row["E_WorkHours"].'" name = "workhours'.$i.'" /> </td>';
                     echo '<td> <input type = "text" class = "emailtext" value = "'.$row["E_Email"].'" name = "email'.$i.'" readonly /> </td>';
                     echo '<td> <input type = "text" class = "phonenumbertext" value = "'.$row["E_PhoneNumber"].'" name = "phonenumber'.$i.'" readonly /> </td>';
-                    if($row["E_WorksAtAS"] != null && $row["E_WorksAtS"] == null)
-                    {
-                        echo '<td> <input type = "text" class = "worksatastext" value = "'.$row["E_WorksAtAS"].' - Animal Section" name = "animalsection location'.$i.'" readonly /> </td>';
-                    }
-                    else if($row["E_WorksAtAS"] == null & $row["E_WorksAtS"] != null)
-                    {
-                        echo '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].' - Store" name = "storelocation'.$i.'" readonly /> </td>';
-                    }
-                    else if($row["E_WorksAtAS"] != null & $row["E_WorksAtS"] != null)
-                    {
-                        '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].' - Store & '.$row["E_WorksAtAS"].' - Animal Section" name = "storelocation'.$i.'" readonly /> </td>';
-                    }
-                    else{echo '<td> <input type = "text" class = "worksatstext" value = "Animal Care Department Building" name = "storelocation'.$i.'" readonly /> </td>';}
+                    echo '<td> <input type = "text" class = "worksattext" value = "'.$row["E_Location"].'" name = "location'.$i.'" readonly /> </td>';
                     echo '<td>';
                     echo '<input type = "submit" value ="Update" name = "up_row'.$i.'" />';
                     
@@ -96,95 +84,13 @@ if(!$conn){
                         }
                     }
                     echo '</td>';
-
-                    /*echo '<td>';
-                    echo '<input type = "submit" value = "Delete" name = "del_row'.$i.'" />';
-
-                    if (isset($_POST['del_row'.$i.''])) {
-                        $nID = $_POST['id'.$i.''];
-                        $delete = "DELETE from Employees WHERE E_ID = '$nID'";
-                        $qry = $conn -> query($delete);
-                        if ($qry == false) {echo "Failed Delete";} else {
-                            header ("location: schedule.php");
-                        }
-                    }
                 
-                    echo '</td>';*/
+                    echo '</td>';
                     echo "</tr>";
                     echo '</form>';
                     //$i++;
             }
-            /*echo '<form action="" method = "post"';
-            echo "<tr>";
-            echo '<td> <input type = "text" class = "idtext" name = "newID" readonly /> </td>';
-            echo '<td> <input type = "text" class = "nametext" name = "newName" /> </td>';
-            echo '<td> <input type = "text" class = "jobtitletext" name = "newJobTitle" /> </td>';
-            echo '<td> <input type = "text" class = "workhourstext" name = "newWorkHours" /> </td>';
-            echo '<td> <input type = "text" class = "emailtext" name = "newEmail" /> </td>';
-            echo '<td> <input type = "text" class = "phonenumbertext" name = "newPhoneNumber" /> </td>';
-            echo '<td> <input type = "text" class = "worksatstext" name = "newWorksAtS" /> </td>';
-            echo '<td> <input type = "text" class = "worksatastext" name = "newWorksAtAS" /> </td>';
-            echo '<td colspan = "2">';
-            echo '<input type = "submit" class = "addbut" value = "Add" name = "add" />';
-            if (isset($_POST['add'])) {
-                $nName = $_POST['newName'];
-                $nJobTitle = $_POST['newJobTitle'];
-                $nWorkHours = $_POST['newWorkHours'];
-                $nEmail = $_POST['newEmail'];
-                $nPhoneNumber = $_POST['newPhoneNumber'];
-                $nWorksAtS = $_POST['newWorksAtS'];
-                $nWorksAtAS = $_POST['newWorksAtAS'];
-                if(!$nName or !$JobTitle or !$nWorkHours or !$nEmail or !$nPhoneNumber or !$nWorksAtS or !$nWorksAtAS) {
-                    echo "Fill out all forms";
-                }
-                else {
-                    $update = "INSERT into Employees (E_Name, E_JobTitle, E_WorkHours, E_Email, E_PhoneNumber, E_WorksAtS, E_WorksAtAS) values ('$nName', '$nJobTitle', '$nWorkHours', '$nEmail', '$nPhoneNumber', '$nWorksAtS', '$nWorksAtAS')";
-                    $qry = $conn ->query($update);
-                    if ($qry === false) {echo "Failed Insert";} else {
-                        header ("location: schedule.php");
-                    }
-                }
-            }
-            echo '</td>';
-            echo '</tr>';
-            echo '</form>';*/
         }
-        /*else { //If no rows in DB only allow to add
-            echo '<form action="" method = "post"';
-            echo "<tr>";
-            echo '<td> <input type = "text" class = "idtext" name = "newID" readonly /> </td>';
-            echo '<td> <input type = "text" class = "nametext" name = "newName" /> </td>';
-            echo '<td> <input type = "text" class = "jobtitletext" name = "newJobTitle" /> </td>';
-            echo '<td> <input type = "text" class = "workhourstext" name = "newWorkHours" /> </td>';
-            echo '<td> <input type = "text" class = "emailtext" name = "newEmail" /> </td>';
-            echo '<td> <input type = "text" class = "phonenumbertext" name = "newPhoneNumber" /> </td>';
-            echo '<td> <input type = "text" class = "worksatstext" name = "newWorksAtS" /> </td>';
-            echo '<td> <input type = "text" class = "worksatastext" name = "newWorksAtAS" /> </td>';
-            echo '<td colspan = "2">';
-            echo '<input type = "submit" class = "addbut" value = "Add" name = "add" />';
-            if (isset($_Post['add'])) {
-                $nName = $_POST['newName'];
-                $nJobTitle = $_POST['newJobtitle'];
-                $nWorkHours = $_POST['newWorkHours'];
-                $nEmail = $_POST['newEmail'];
-                $nPhoneNumber = $_POST['newPhoneNumber'];
-                $nWorksAtS = $_POST['newWorksAtS'];
-                $nWorksAtAS = $_POST['newWorksAtAS'];
-                if(!$nName or !$JobTitle or !$nWorkHours or !$nEmail or !$nPhoneNumber or !$nWorksAtS or !$nWorksAtAS) {
-                    echo "Fill out all forms";
-                }
-                else {
-                    $update = "INSERT into Employees (E_Name, E_JobTitle, E_WorkHours, E_Email, E_PhoneNumber, E_WorksAtS, E_WorksAtAS) values ('$nName', '$nJobTitle', '$nWorkHours', '$nEmail', '$nPhoneNumber', '$nWorksAtS', '$nWorksAtAS')";
-                    $qry = $conn ->query($update);
-                    if ($qry === false) {echo "Failed Insert";} else {
-                        header ("location: schedule.php");
-                    }
-                }
-            }
-            echo '</td>';
-            echo '</tr>';
-            echo '</form>';
-        }*/
         ?>
         </table>
 
@@ -215,19 +121,7 @@ if(!$conn){
                     echo '<td> <input type = "text" class = "workhourstext" value = "'.$row["E_WorkHours"].'" name = "workhours'.$i.'" /> </td>';
                     echo '<td> <input type = "text" class = "emailtext" value = "'.$row["E_Email"].'" name = "email'.$i.'" readonly /> </td>';
                     echo '<td> <input type = "text" class = "phonenumbertext" value = "'.$row["E_PhoneNumber"].'" name = "phonenumber'.$i.'" readonly /> </td>';
-                    if($row["E_WorksAtAS"] != null && $row["E_WorksAtS"] == null)
-                    {
-                        echo '<td> <input type = "text" class = "worksatastext" value = "'.$row["E_WorksAtAS"].' - Animal Section" name = "animalsection location'.$i.'" readonly /> </td>';
-                    }
-                    else if($row["E_WorksAtAS"] == null & $row["E_WorksAtS"] != null)
-                    {
-                        echo '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].' - Store" name = "storelocation'.$i.'" readonly /> </td>';
-                    }
-                    else if($row["E_WorksAtAS"] != null & $row["E_WorksAtS"] != null)
-                    {
-                        '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].' - Store & '.$row["E_WorksAtAS"].' - Animal Section" name = "storelocation'.$i.'" readonly /> </td>';
-                    }
-                    else{echo '<td> <input type = "text" class = "worksatstext" value = "Retail Department Building" name = "storelocation'.$i.'" readonly /> </td>';}
+                    echo '<td> <input type = "text" class = "worksattext" value = "'.$row["E_Location"].'" name = "location'.$i.'" readonly /> </td>';
                     echo '<td>';
                     echo '<input type = "submit" value ="Update" name = "up_row'.$i.'" />';
                     
@@ -278,19 +172,7 @@ if(!$conn){
                     echo '<td> <input type = "text" class = "workhourstext" value = "'.$row["E_WorkHours"].'" name = "workhours'.$i.'" /> </td>';
                     echo '<td> <input type = "text" class = "emailtext" value = "'.$row["E_Email"].'" name = "email'.$i.'" readonly /> </td>';
                     echo '<td> <input type = "text" class = "phonenumbertext" value = "'.$row["E_PhoneNumber"].'" name = "phonenumber'.$i.'" readonly /> </td>';
-                    if($row["E_WorksAtAS"] != null && $row["E_WorksAtS"] == null)
-                    {
-                        echo '<td> <input type = "text" class = "worksatastext" value = "'.$row["E_WorksAtAS"].' - Animal Section" name = "animalsection location'.$i.'" readonly /> </td>';
-                    }
-                    else if($row["E_WorksAtAS"] == null & $row["E_WorksAtS"] != null)
-                    {
-                        echo '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].' - Store" name = "storelocation'.$i.'" readonly /> </td>';
-                    }
-                    else if($row["E_WorksAtAS"] != null & $row["E_WorksAtS"] != null)
-                    {
-                        '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].' - Store & '.$row["E_WorksAtAS"].' - Animal Section" name = "storelocation'.$i.'" readonly /> </td>';
-                    }
-                    else{echo '<td> <input type = "text" class = "worksatstext" value = "Police Department Building" name = "storelocation'.$i.'" readonly /> </td>';}
+                    echo '<td> <input type = "text" class = "worksattext" value = "'.$row["E_Location"].'" name = "location'.$i.'" readonly /> </td>';
                     echo '<td>';
                     echo '<input type = "submit" value ="Update" name = "up_row'.$i.'" />';
                     
@@ -341,19 +223,7 @@ if(!$conn){
                     echo '<td> <input type = "text" class = "workhourstext" value = "'.$row["E_WorkHours"].'" name = "workhours'.$i.'" /> </td>';
                     echo '<td> <input type = "text" class = "emailtext" value = "'.$row["E_Email"].'" name = "email'.$i.'" readonly /> </td>';
                     echo '<td> <input type = "text" class = "phonenumbertext" value = "'.$row["E_PhoneNumber"].'" name = "phonenumber'.$i.'" readonly /> </td>';
-                    if($row["E_WorksAtAS"] != null && $row["E_WorksAtS"] == null)
-                    {
-                        echo '<td> <input type = "text" class = "worksatastext" value = "'.$row["E_WorksAtAS"].' - Animal Section" name = "animalsection location'.$i.'" readonly /> </td>';
-                    }
-                    else if($row["E_WorksAtAS"] == null & $row["E_WorksAtS"] != null)
-                    {
-                        echo '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].' - Store" name = "storelocation'.$i.'" readonly /> </td>';
-                    }
-                    else if($row["E_WorksAtAS"] != null & $row["E_WorksAtS"] != null)
-                    {
-                        '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].' - Store & '.$row["E_WorksAtAS"].' - Animal Section" name = "storelocation'.$i.'" readonly /> </td>';
-                    }
-                    else{echo '<td> <input type = "text" class = "worksatstext" value = "Veterinary Department Building" name = "storelocation'.$i.'" readonly /> </td>';}
+                    echo '<td> <input type = "text" class = "worksattext" value = "'.$row["E_Location"].'" name = "location'.$i.'" readonly /> </td>';
                     echo '<td>';
                     echo '<input type = "submit" value ="Update" name = "up_row'.$i.'" />';
                     
@@ -390,7 +260,8 @@ if(!$conn){
                 </tr>
 
             <?php
-            $sql = "SELECT * FROM Employees WHERE E_Department = 'Attractions'"; //May need to specify departments here
+            $attractions = 'Attractions';
+            $sql = "SELECT * FROM Employees WHERE E_Department = '$attractions'"; //May need to specify departments here
             $result = $conn->query($sql);
             // output data of each row 
             if ($result->num_rows > 0) {
@@ -404,19 +275,7 @@ if(!$conn){
                     echo '<td> <input type = "text" class = "workhourstext" value = "'.$row["E_WorkHours"].'" name = "workhours'.$i.'" /> </td>';
                     echo '<td> <input type = "text" class = "emailtext" value = "'.$row["E_Email"].'" name = "email'.$i.'" readonly /> </td>';
                     echo '<td> <input type = "text" class = "phonenumbertext" value = "'.$row["E_PhoneNumber"].'" name = "phonenumber'.$i.'" readonly /> </td>';
-                    if($row["E_WorksAtAS"] != null && $row["E_WorksAtS"] == null)
-                    {
-                        echo '<td> <input type = "text" class = "worksatastext" value = "'.$row["E_WorksAtAS"].' - Animal Section" name = "animalsection location'.$i.'" readonly /> </td>';
-                    }
-                    else if($row["E_WorksAtAS"] == null & $row["E_WorksAtS"] != null)
-                    {
-                        echo '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].' - Store" name = "storelocation'.$i.'" readonly /> </td>';
-                    }
-                    else if($row["E_WorksAtAS"] != null & $row["E_WorksAtS"] != null)
-                    {
-                        '<td> <input type = "text" class = "worksatstext" value = "'.$row["E_WorksAtS"].' - Store & '.$row["E_WorksAtAS"].' - Animal Section" name = "storelocation'.$i.'" readonly /> </td>';
-                    }
-                    else{echo '<td> <input type = "text" class = "worksatstext" value = "Attraction Department Building" name = "storelocation'.$i.'" readonly /> </td>';}
+                    echo '<td> <input type = "text" class = "worksattext" value = "'.$row["E_Location"].'" name = "location'.$i.'" readonly /> </td>';
                     echo '<td>';
                     echo '<input type = "submit" value ="Update" name = "up_row'.$i.'" />';
                     
