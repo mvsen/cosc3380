@@ -166,7 +166,6 @@ function loginUser($conn, $username, $pwd)
     }
 
 }
-
 function createUserEmployee($conn, $name, $email, $username, $pwd)
 {
     $sql = "INSERT into ZOOSchema.users (usersName, usersEmail, usersUid, usersPwd, usersRank) VALUES (?,?,?,?, ?);";
