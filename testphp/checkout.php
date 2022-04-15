@@ -16,6 +16,7 @@ if (isset($_POST['purchase'])) {
             $name = $value['name'];
             $quan = $value['quantity'];
             $cid = $_SESSION['userid'];
+            $today = date("Y-m-d H:i:s");
             $sql = "UPDATE Products SET Pr_Quantity =  Pr_Quantity - '$quan' WHERE Pr_ID = '$id'";
             
             $qry = $conn->query($sql);
@@ -23,7 +24,7 @@ if (isset($_POST['purchase'])) {
                 echo "FAIL";
                 header("location: checkout.php");
             }
-            $sql2 = "INSERT Tickets SET C_id = '$cid', PR_Id = '$id', quantity = '$quan'";
+            $sql2 = "INSERT Tickets SET C_id = '$cid', PR_Id = '$id', quantity = '$quan', date_sold = '$today' ";
             $qry = $conn->query($sql2);
             if ($qry === false) {
                 echo "FAIL";
@@ -33,7 +34,7 @@ if (isset($_POST['purchase'])) {
         }
         echo '<script>alert("Purchase Succecful")</script>';
         unset($_SESSION['cart']);
-        header("location: shop.php");
+   
     }
 }
 

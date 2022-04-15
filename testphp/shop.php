@@ -227,10 +227,7 @@ if (isset($_GET['action'])) {
 </body>
 
 
-        <section>
-        <p>Cart<span class='cart-counter'>1</span></p>
-<div class='addtocart'>addtocart</div>
-        </section>
+
 
 
 <?php
