@@ -6,7 +6,7 @@ include_once 'header.php'
             <h2> Log In</h2>
             <div class="signup-form-form">
             <form action="includes/login.inc.php" method="post" >
-                <input type="text" name="name" placeholder="Username/Email...">
+                <input type="text" name="uid" placeholder="Username/Email...">
                 <input type="password" name="pwd" placeholder="Password...">
                 
                 <button type="submit" name="submit"> Log In </button>
@@ -21,9 +21,13 @@ if (isset($_GET["error"]))
     {
        echo "<p>Fill in all fields!</p>";
     }
-    else if ($_GET["error"] == "wronglogin")
+    else if ($_GET["error"] == "wronglogin1")
     {
-       echo "<p>Incorrect login information!</p>";
+       echo "<p>Incorrect login information SQL query doesnt exist!</p>";
+    }
+    else if ($_GET["error"] == "wronglogin2")
+    {
+       echo "<p>Incorrect login information password!</p>";
     }
   
     
