@@ -51,10 +51,9 @@ if (isset($_POST["submit"]))
         header("location: ../staff.php?error=invalidBDay");
     }
     
-
-    createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt);
-    createUserEmployee($conn, $name, $email, $username, $pwd);
-
+    //createUserEmployee($conn, $name, $email, $username, $pwd);
+    createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt,$username,$pwd);
+    
 }
 else {
     header("location: ../staff.php?error=none");
