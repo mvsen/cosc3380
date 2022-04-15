@@ -169,7 +169,7 @@ function loginUser($conn, $username, $pwd)
 
 function createUserEmployee($conn, $name, $email, $username, $pwd)
 {
-    $sql = "INSERT into ZOOSchema.users (usersName, usersEmail, usersUid, usersPwd) VALUES (?,?,?,?);";
+    $sql = "INSERT into ZOOSchema.users (usersName, usersEmail, usersUid, usersPwd, usersRank) VALUES (?,?,?,?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql))
     {
@@ -179,7 +179,8 @@ function createUserEmployee($conn, $name, $email, $username, $pwd)
     }
 
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hashedPwd);
+    $rank = "employee";
+    mysqli_stmt_bind_param($stmt, "sssss", $name, $email, $username, $hashedPwd, $rank);
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
@@ -191,8 +192,11 @@ function createUserEmployee($conn, $name, $email, $username, $pwd)
 
 }
 
-function createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt,$username,$pwd) {
-    $sql = "INSERT into ZOOSchema.Employees(E_Name, E_Birthdate, E_Gender, E_Email, E_Phonenumber, E_Address, E_Pay, E_JobTitle, E_WorkHours, E_Department, E_WorksAtS) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+
+
+function createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt) {
+    $sql = "INSERT into ZOOSchema.Employees(E_Name, E_Birthdate, E_Gender, E_Email, E_PhoneNumber, E_Address, E_Pay, E_JobTitle, E_WorkHours, E_Department, E_Location ) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+    
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql))
     {
@@ -207,7 +211,6 @@ function createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $
 
     mysqli_stmt_close($stmt);
 
-    createUserEmployee($conn, $name, $email, $username, $pwd);
 
     header("location: ../staff.php?error=none");
     exit();
