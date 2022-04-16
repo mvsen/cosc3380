@@ -75,7 +75,7 @@ include_once 'header.php'
 
   <div class="signup-form-form">
       
-            <form action="includes/profile2.inc.php" method="post" >
+            <form action="includes/profile5.inc.php" method="post" >
                 
                 <?php
                     $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
@@ -123,7 +123,7 @@ include_once 'header.php'
                     User ID :<input type='text' name = 'id' value="<?php echo $newid; ?>" placeholder="<?php echo $newid; ?>" readonly>
                     Hours :<input type='text' name='hours' placeholder='Hours Worked...'>
                     Date : <input type='date' name='day' placeholder='day'>  
-                    <button type="submit" name="submit2"> Submit Hours</button>  
+                    <button type="submit" name="submit5"> Submit Hours</button>  
             </form>
             </div>
             <?php
@@ -152,7 +152,7 @@ include_once 'header.php'
 
 </section>
 <section>
-<p> Generate Work Report</p>
+<p> Generate Work History</p>
  
 
 
@@ -206,7 +206,7 @@ include_once 'header.php'
                    User ID: <input type='text' name = 'id' value="<?php echo $newid; ?>" placeholder="<?php echo $newid; ?>" readonly>
                    Start Date: <input type='date' name='day1' placeholder='Start Date...'>
                    End Date: <input type='date' name='day2' placeholder='End Date'>  
-                   <button type="submit" name="submit2"> Generate Report</button>  
+                   <button type="submit" name="submit2"> Generate History</button>  
            </form>
            </div>
            <?php

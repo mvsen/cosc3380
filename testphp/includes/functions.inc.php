@@ -140,6 +140,33 @@ function updateHours($conn, $department, $id, $hours, $day)
 
 }
 
+function updateHoursE($conn, $department, $id, $hours, $day)
+{
+    $sql = "INSERT into ZOOSchema.Hours (hours, Date, E_Id, D_Name) VALUES (?,?,?,?);";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../profile.php?error=stmt2failed");
+        exit();
+
+    }
+
+
+    mysqli_stmt_bind_param($stmt, "isss", $hours, $day, $id, $department);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+
+
+    header("location: ../profile.php?error=none29");
+    exit();
+
+
+
+
+}
+
 function modifyHours($conn, $department, $id, $hours, $day)
 {
 

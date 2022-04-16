@@ -221,7 +221,7 @@ include_once 'header.php'
 
 </section>
 <section>
-<p> Generate Admin Work Report</p>
+<p> Generate Admin Work History</p>
  
 
 
@@ -275,7 +275,7 @@ include_once 'header.php'
                    User ID: <input type='text' name = 'id' value="<?php echo $newid; ?>" placeholder="<?php echo $newid; ?>" readonly>
                    Start Date: <input type='date' name='day1' placeholder='Start Date...'>
                    End Date: <input type='date' name='day2' placeholder='End Date'>  
-                   <button type="submit" name="submit2"> Generate Report</button>  
+                   <button type="submit" name="submit2"> Generate History</button>  
            </form>
            </div>
            <?php
@@ -567,7 +567,7 @@ $stmt = mysqli_stmt_init($conn);
 
 
 <section>
-<p> Generate Employee Work Report</p>
+<p> Generate Employee Work History</p>
  
 
 
@@ -646,7 +646,7 @@ $stmt = mysqli_stmt_init($conn);
                   
                    Start Date: <input type='date' name='day1' placeholder='Start Date...'>
                    End Date: <input type='date' name='day2' placeholder='End Date'>  
-                   <button type="submit" name="submit2"> Generate Report</button>  
+                   <button type="submit" name="submit2"> Generate History</button>  
            </form>
            </div>
            <?php
@@ -722,7 +722,7 @@ $stmt = mysqli_stmt_init($conn);
 
 <section>
 <H2> All</H2>
-<p> Generate All Work Report</p>
+<p> Generate All Work History</p>
  
 
 
@@ -793,7 +793,7 @@ $stmt = mysqli_stmt_init($conn);
                   
                    Start Date: <input type='date' name='day1' placeholder='Start Date...'>
                    End Date: <input type='date' name='day2' placeholder='End Date'>  
-                   <button type="submit" name="submit2"> Generate Report</button>  
+                   <button type="submit" name="submit2"> Generate History</button>  
            </form>
            </div>
            <?php
@@ -869,11 +869,522 @@ $stmt = mysqli_stmt_init($conn);
 
 
 
+<H2> Reports</H2>
+<H3> Work History</H3>
+ 
+
+
+ <div class="signup-form-form">
+     
+           <form method="get" >
+               
+               <?php
+                   $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+                   $dBUsername = "admin";
+                   $dBPassword = "cosc3380";
+                   $dBname = "ZOOSchema";
+                   $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+                   $sql = "SELECT * FROM ZOOSchema.Departments;";
+                   $stmt = mysqli_stmt_init($conn);
+               if (!mysqli_stmt_prepare($stmt, $sql))
+               {
+                   header("location: ../profile.php?error=stmt1failed");
+                   exit();
+           
+               }
+               $username1 = $_SESSION['useruid'];
+              // mysqli_stmt_bind_param($stmt, "s", $username1);
+               mysqli_stmt_execute($stmt);
+           
+               $result = mysqli_stmt_get_result($stmt);
+
+               $sql2 = "SELECT * FROM ZOOSchema.users;";
+               $stmt2 = mysqli_stmt_init($conn);
+           if (!mysqli_stmt_prepare($stmt2, $sql2))
+           {
+               header("location: ../profile.php?error=stmt1failed");
+               exit();
+       
+           }
+           $username1 = $_SESSION['useruid'];
+          // mysqli_stmt_bind_param($stmt, "s", $username1);
+           mysqli_stmt_execute($stmt2);
+       
+           $result2 = mysqli_stmt_get_result($stmt2);
+
+
+             
+           
+               //$row = mysqli_fetch_assoc($resultData);
+               //print_r($row);
+               $all = "All";
+               
+               echo "Type: <select name='type'>";
+               echo "<option value='least'>Worked the Least</option>";
+               echo "<option value='most'>Worked the Most</option>";
+               echo "</select>";
+
+               echo "Department: <select name='department6'>";
+                   while($row = mysqli_fetch_array($result)){
+                       
+                       echo "<option value='" . $row['D_Name'] ."'>" . $row['D_Name'] ."</option>";
+                       
+                   }
+                   
+                   echo "<option value='" . $all ."' placeholder='All'</option>";
+                   echo "</select>";
+
+
+                   
+             
+                  // echo "<input type='text' name = 'id' value='". $newid." placeholder='". $newid." readonly>";
+                 //  echo "<input type='text' name='name' placeholder='Full name...'>";
+                   //echo "<input type='text' name='hours' placeholder='Hours Worked...'>";
+                   //echo "<input type='date' name='day' placeholder='day'>;
+                       
+                   ?>
+                  
+                   Start Date: <input type='date' name='day1' placeholder='Start Date...'>
+                   End Date: <input type='date' name='day2' placeholder='End Date'>  
+                   <button type="submit" name="submit2"> Generate History</button>  
+           </form>
+           </div>
+           <?php
+
+                   
+                   
+                   
+
+
+
+
+
+
+?>
+
+<a = herf="#" onclick="widnow.print();"></a>
+<?php
+if (isset($_GET['type'])){
+$serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+$dBUsername = "admin";
+$dBPassword = "cosc3380";
+$dBname = "ZOOSchema";
+$conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+$type = $_GET['type'];
+$dep= $_GET['department6'];
+$day1 = $_GET['day1'];
+$day2 = $_GET['day2'];
+$username1 = $_GET['id'];
+if ($type == "most")
+{
+    $sql = "SELECT sum(hours), E_Id FROM ZOOSchema.Hours
+where D_Name = ? and ZOOSchema.Hours.Date between ? and ? 
+group by E_Id
+order by sum(hours)desc;";
+}
+else{
+    $sql = "SELECT sum(hours), E_Id FROM ZOOSchema.Hours
+    where D_Name = ? and ZOOSchema.Hours.Date between ? and ? 
+    group by E_Id
+    order by sum(hours)asc;";
+}
+
+$stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql))
+                {
+                    header("location: ../profilea.php?error=stmt1failed");
+                    exit();
+            
+                }
+
+                mysqli_stmt_bind_param($stmt, "sss", $dep, $day1, $day2);
+                mysqli_stmt_execute($stmt);
+            
+                $result = mysqli_stmt_get_result($stmt);
+                $row = mysqli_fetch_array($result);
+                $temp = $row['E_Id'];
+
+                $s = "SELECT usersName FROM ZOOSchema.users where usersId = ?;";
+                $stmt1 = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt1, $s))
+                {
+                    header("location: ../profilea.php?error=stmt1failed");
+                    exit();
+            
+                }
+
+                mysqli_stmt_bind_param($stmt1, "s", $temp);
+                mysqli_stmt_execute($stmt1);
+            
+                $result1 = mysqli_stmt_get_result($stmt1);
+                $row1 = mysqli_fetch_array($result1);
+                $n = $row1['usersName'];
+                
+                
+
+            if ($type == "Worked the Most")
+            {
+                echo"<br/> " . $n . "," . $row['E_Id'] . ",worked the most!";
+            }
+            else{
+                echo"<br/> " . $n. "," . $row['E_Id'] . ",worked the least!";
+            }
+           
+          
+        }
+            ?>
+            </section>
+            <section>
+ <H3> Ride History</H3>           
+<form method="get" >
+               
+               <?php
+                   $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+                   $dBUsername = "admin";
+                   $dBPassword = "cosc3380";
+                   $dBname = "ZOOSchema";
+                   $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+                   $sql = "SELECT * FROM ZOOSchema.Products;";
+                   $stmt = mysqli_stmt_init($conn);
+               if (!mysqli_stmt_prepare($stmt, $sql))
+               {
+                   header("location: ../profile.php?error=stmt1failed");
+                   exit();
+           
+               }
+               $username1 = $_SESSION['useruid'];
+              // mysqli_stmt_bind_param($stmt, "s", $username1);
+               mysqli_stmt_execute($stmt);
+           
+               $result = mysqli_stmt_get_result($stmt);
+
+               $sql2 = "SELECT * FROM ZOOSchema.users;";
+               $stmt2 = mysqli_stmt_init($conn);
+           if (!mysqli_stmt_prepare($stmt2, $sql2))
+           {
+               header("location: ../profile.php?error=stmt1failed");
+               exit();
+       
+           }
+           $username1 = $_SESSION['useruid'];
+          // mysqli_stmt_bind_param($stmt, "s", $username1);
+           mysqli_stmt_execute($stmt2);
+       
+           $result2 = mysqli_stmt_get_result($stmt2);
+
+
+             
+           
+               //$row = mysqli_fetch_assoc($resultData);
+               //print_r($row);
+               $all = "All";
+
+            
+               
+               echo "Type: <select name='type3'>";
+               echo "<option value='least'>Least Purchased Voucher</option>";
+               echo "<option value='most'>Most Purchased Voucher </option>";
+               echo "</select>";
+
+
+
+                   
+             
+                  // echo "<input type='text' name = 'id' value='". $newid." placeholder='". $newid." readonly>";
+                 //  echo "<input type='text' name='name' placeholder='Full name...'>";
+                   //echo "<input type='text' name='hours' placeholder='Hours Worked...'>";
+                   //echo "<input type='date' name='day' placeholder='day'>;
+                       
+                   ?>
+        
+    
+        <button type="submit" name="submit2"> Generate History</button>  
+           </form>
+           </div>
+           <?php
+
+                   
+                   
+                   
+
+
+
+
+
+
+?>
+
+<a = herf="#" onclick="widnow.print();"></a>
+<?php
+if (isset($_GET['type3'])){
+$serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+$dBUsername = "admin";
+$dBPassword = "cosc3380";
+$dBname = "ZOOSchema";
+$conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+$type = $_GET['type3'];
+
+if ($type == "least")
+{
+    $sql = "SELECT PR_Id, sum(quantity) as 'Quantity',
+    CASE WHEN PR_Id = 3 THEN 'Adult Train Voucher'
+        WHEN PR_Id = 4 THEN 'Youth Train Voucher'
+        WHEN PR_Id = 5 THEN 'Adult Carousel Voucher'
+        WHEN PR_Id = 6 THEN 'Youth Train Voucher'
+        WHEN PR_Id = 7 THEN 'Adult Feris Wheel Voucher'
+        ELSE 'Youth Feris Wheel Voucher'
+        END AS 'Voucher Name'
+        FROM ZOOSchema.Tickets
+      where PR_Id != 1 and PR_Id != 2
+      group by PR_Id
+      order by sum(quantity) asc;";
+}
+else{
+    $sql = "SELECT PR_Id, sum(quantity) as 'Quantity',
+    CASE WHEN PR_Id = 3 THEN 'Adult Train Voucher'
+        WHEN PR_Id = 4 THEN 'Youth Train Voucher'
+        WHEN PR_Id = 5 THEN 'Adult Carousel Voucher'
+        WHEN PR_Id = 6 THEN 'Youth Train Voucher'
+        WHEN PR_Id = 7 THEN 'Adult Feris Wheel Voucher'
+        ELSE 'Youth Feris Wheel Voucher'
+        END AS 'Voucher Name'
+        FROM ZOOSchema.Tickets
+      where PR_Id != 1 and PR_Id != 2
+      group by PR_Id
+      order by sum(quantity) desc;";
+}
+
+$stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql))
+                {
+                    header("location: ../profilea.php?error=stmt1failed");
+                    exit();
+            
+                }
+
+               
+                mysqli_stmt_execute($stmt);
+            
+                $result = mysqli_stmt_get_result($stmt);
+              
+
+                
+                
+
+
+  
+                
+            $count = mysqli_num_rows($result);
+
+        echo "<br/>$count Records Found";
+        echo "<table border = '1' align = center'>";
+
+        echo "<tr>";
+        echo "<th>Voucher Id</th>";
+        echo "<th>Quantity</th>";
+        echo "<th>Voucher Name</th>";
+        echo "</tr>";
+
+        while($row = mysqli_fetch_array($result))
+        {
+        
+            echo "<tr>";
+            echo "<td>{$row['PR_Id']}</td>";
+            echo "<td>{$row['Quantity']}</td>";
+            echo "<td>{$row['Voucher Name']}</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+           
+          
+        }
+            ?>
+
+</section>
+<section>
+ <H3> Ticket History</H3>           
+<form method="get" >
+               
+               <?php
+                   $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+                   $dBUsername = "admin";
+                   $dBPassword = "cosc3380";
+                   $dBname = "ZOOSchema";
+                   $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+                   $sql = "SELECT * FROM ZOOSchema.Products;";
+                   $stmt = mysqli_stmt_init($conn);
+               if (!mysqli_stmt_prepare($stmt, $sql))
+               {
+                   header("location: ../profile.php?error=stmt1failed");
+                   exit();
+           
+               }
+               $username1 = $_SESSION['useruid'];
+              // mysqli_stmt_bind_param($stmt, "s", $username1);
+               mysqli_stmt_execute($stmt);
+           
+               $result = mysqli_stmt_get_result($stmt);
+
+               $sql2 = "SELECT * FROM ZOOSchema.users;";
+               $stmt2 = mysqli_stmt_init($conn);
+           if (!mysqli_stmt_prepare($stmt2, $sql2))
+           {
+               header("location: ../profile.php?error=stmt1failed");
+               exit();
+       
+           }
+           $username1 = $_SESSION['useruid'];
+          // mysqli_stmt_bind_param($stmt, "s", $username1);
+           mysqli_stmt_execute($stmt2);
+       
+           $result2 = mysqli_stmt_get_result($stmt2);
+
+
+             
+           
+               //$row = mysqli_fetch_assoc($resultData);
+               //print_r($row);
+               $all = "All";
+
+            
+               
+               echo "Type: <select name='type2'>";
+               echo "<option value='least'>Least Busiest Day</option>";
+               echo "<option value='most'>Most Busiest Day</option>";
+               echo "</select>";
+
+
+
+                   
+             
+                  // echo "<input type='text' name = 'id' value='". $newid." placeholder='". $newid." readonly>";
+                 //  echo "<input type='text' name='name' placeholder='Full name...'>";
+                   //echo "<input type='text' name='hours' placeholder='Hours Worked...'>";
+                   //echo "<input type='date' name='day' placeholder='day'>;
+                       
+                   ?>
+        
+    
+        <button type="submit" name="submit2"> Generate History</button>  
+           </form>
+           </div>
+           <?php
+
+                   
+                   
+                   
+
+
+
+
+
+
+?>
+
+<a = herf="#" onclick="widnow.print();"></a>
+<?php
+if (isset($_GET['type2'])){
+$serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+$dBUsername = "admin";
+$dBPassword = "cosc3380";
+$dBname = "ZOOSchema";
+$conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+$type = $_GET['type2'];
+
+if ($type == "least")
+{
+    $sql = "SELECT sum(quantity) as 'Number of Tickets',
+    CASE WHEN dayofweek(date_sold) = 6 THEN 'Friday'
+    WHEN dayofweek(date_sold) = 5 THEN 'Thursday'
+    WHEN dayofweek(date_sold) = 4 THEN 'Wednesday'
+    WHEN dayofweek(date_sold) = 3 THEN 'Tuesday'
+    WHEN dayofweek(date_sold) = 2 THEN 'Monday'
+    WHEN dayofweek(date_sold) = 7 THEN 'Saturday'
+    ELSE 'Sunday'
+    END AS Day
+    FROM ZOOSchema.Tickets
+    where date_sold !='0000-00-00 00:00:00' and (PR_Id = 1 or PR_Id =2)
+    group by Day
+    order by sum(quantity)  asc;";
+}
+else{
+    $sql = "SELECT sum(quantity) as 'Number of Tickets',
+    CASE WHEN dayofweek(date_sold) = 6 THEN 'Friday'
+    WHEN dayofweek(date_sold) = 5 THEN 'Thursday'
+    WHEN dayofweek(date_sold) = 4 THEN 'Wednesday'
+    WHEN dayofweek(date_sold) = 3 THEN 'Tuesday'
+    WHEN dayofweek(date_sold) = 2 THEN 'Monday'
+    WHEN dayofweek(date_sold) = 7 THEN 'Saturday'
+    ELSE 'Sunday'
+    END AS Day
+    FROM ZOOSchema.Tickets
+    where date_sold !='0000-00-00 00:00:00' and (PR_Id = 1 or PR_Id =2)
+    group by Day
+    order by sum(quantity)  desc;";
+}
+
+$stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql))
+                {
+                    header("location: ../profilea.php?error=stmt1failed");
+                    exit();
+            
+                }
+
+               
+                mysqli_stmt_execute($stmt);
+            
+                $result = mysqli_stmt_get_result($stmt);
+              
+                $temp = $row1['Day'];
+
+                
+                
+
+
+  
+                
+            $count = mysqli_num_rows($result);
+
+        echo "<br/>$count Records Found";
+        echo "<table border = '1' align = center'>";
+
+        echo "<tr>";
+        echo "<th>Ticket Quantity</th>";
+        echo "<th>Day of the Week</th>";
+        echo "</tr>";
+
+        while($row = mysqli_fetch_array($result))
+        {
+        
+            echo "<tr>";
+            echo "<td>{$row['Number of Tickets']}</td>";
+            echo "<td>{$row['Day']}</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+           
+          
+        }
+            ?>
+
+</section>
+
+
+
+
 
 
 
 
 <?php
+
+
+
+
+
+
+
 
 
 
