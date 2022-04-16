@@ -121,7 +121,7 @@ include_once 'header.php'
                    Start Date: <input type='date' name='day1' placeholder='Start Date...'>
                    End Date: <input type='date' name='day2' placeholder='End Date'> 
 
-                   <button type="submit" name="submit2"> Generate Report</button>  
+                   <button type="submit" name="submit2"> Generate History</button>  
            </form>
            </div>
            <?php
@@ -173,7 +173,15 @@ $stmt1 = mysqli_stmt_init($conn);
 
   
                        
-                    //echo $tickname.'<br>';
+                    //echo $tickname.'<br>' SELECT PR_Id, sum(quantity) FROM ZOOSchema.Tickets
+//where PR_Id != 1 and PR_Id != 2
+//group by PR_Id
+//order by sum(quantity) desc;;
+
+
+//SELECT E_ID, sum(H_Id) FROM ZOOSchema.Hours
+//where Date between '04-01-2022' and '04-30-2022'
+//group by E_ID;
                     
                 
                 
@@ -222,6 +230,15 @@ $stmt = mysqli_stmt_init($conn);
         
 
 </section>
+
+<section>
+
+
+</section>
+
+
+
+
 
 
 

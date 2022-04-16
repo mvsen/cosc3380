@@ -127,12 +127,101 @@ if (isset($_GET['action'])) {
   }
 </style>
 
+<style>
+.alert {
+  padding: 20px;
+  background-color: lightblue;
+  color: white;
+}
+.ct {
+    text-align: center;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+</style>
+</head>
 <body>
-  <?php
-  if (isset($_SESSION["useruid"])) {
-    echo "<p> Hello there " . $_SESSION['useruid'] . "</p>";
-  }
+<?php
+  $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+  $dBUsername = "admin";
+  $dBPassword = "cosc3380";
+  $dBname = "ZOOSchema";
+  $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+  $sql = "SELECT PR_Id, sum(quantity) FROM ZOOSchema.Tickets
+  where PR_Id != 1 and PR_Id != 2
+  group by PR_Id
+  order by max(quantity) desc;";
+  $stmt = mysqli_stmt_init($conn);
+if (!mysqli_stmt_prepare($stmt, $sql))
+{
+  header("location: ../shop.php?error=stmt1failed");
+  exit();
+
+}
+$username1 = $_SESSION['useruid'];
+// mysqli_stmt_bind_param($stmt, "s", $username1);
+mysqli_stmt_execute($stmt);
+
+$result = mysqli_stmt_get_result($stmt);
+$row = mysqli_fetch_array($result);
+
+$s = "SELECT Pr_Name FROM ZOOSchema.Products where PR_Id = '{$row['PR_Id']}';";
+$stmt1 = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt1, $s))
+                {
+                    header("location: ../shop.php?error=stmt1failed");
+                    exit();
+            
+                }
+
+                mysqli_stmt_execute($stmt1);
+            
+                $result1 = mysqli_stmt_get_result($stmt1);
+               
+                
+                $count = mysqli_num_rows($result1);
+
+                while($row = mysqli_fetch_array($result1)){
+                       
+                    $tickname = $row["Pr_Name"];
+                    
+                }
+
+
+
+echo "<div class='alert'>";
+
+//echo "<span class='closebtn' onclick='this.parentElement.style.display='none';'>&times;</span> ";
+
+echo"<H class='ct'> The most popular ticket is the " . $tickname . " ! Buy one today!";
+  
+  
+
   ?>
+
+
+
+</div>
+
+</body>
+
+<body>
+
+
+  
   <h2 style="text-align:center; margin-top: 40px">Admission Tickets</h2>
   <div class="row">
     <?php

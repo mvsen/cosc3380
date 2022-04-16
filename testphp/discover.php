@@ -4,6 +4,87 @@ include_once 'header.php'
 ?>
 <link rel="stylesheet" href="css/style.css">
 
+<style>
+.alert {
+  padding: 20px;
+  background-color: lightblue;
+  color: white;
+}
+.ct {
+    text-align: center;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+</style>
+</head>
+<body>
+<?php
+  $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+  $dBUsername = "admin";
+  $dBPassword = "cosc3380";
+  $dBname = "ZOOSchema";
+  $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+  $sql = "SELECT sum(quantity) ,
+  CASE WHEN dayofweek(date_sold) = 6 THEN 'Friday'
+  WHEN dayofweek(date_sold) = 5 THEN 'Thursday'
+  WHEN dayofweek(date_sold) = 4 THEN 'Wednesday'
+  WHEN dayofweek(date_sold) = 3 THEN 'Tuesday'
+  WHEN dayofweek(date_sold) = 2 THEN 'Monday'
+  WHEN dayofweek(date_sold) = 7 THEN 'Saturday'
+  ELSE 'Sunday'
+  END AS day0
+  FROM ZOOSchema.Tickets
+  where date_sold !='0000-00-00 00:00:00' and (PR_Id = 1 or PR_Id =2)
+  group by day0
+  order by sum(quantity) asc;";
+  $stmt = mysqli_stmt_init($conn);
+if (!mysqli_stmt_prepare($stmt, $sql))
+{
+  header("location: ../discover.php?error=stmt1failed");
+  exit();
+
+}
+$username1 = $_SESSION['useruid'];
+// mysqli_stmt_bind_param($stmt, "s", $username1);
+mysqli_stmt_execute($stmt);
+
+$result = mysqli_stmt_get_result($stmt);
+$row = mysqli_fetch_array($result);
+
+
+        
+
+
+
+echo "<div class='alert'>";
+
+//echo "<span class='closebtn' onclick='this.parentElement.style.display='none';'>&times;</span> ";
+
+echo"<H class='ct'> The least busiest day is " . $row['day0'] . " ! Come visit us then for smaller lines!";
+  
+  
+
+  ?>
+
+
+
+</div>
+
+</body>
+
 <section class ="index-intro">
 
         
