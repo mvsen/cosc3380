@@ -347,7 +347,7 @@ function createUserEmployee($conn, $name, $email, $username, $pwd)
     mysqli_stmt_close($stmt);
 
 
-
+    echo "Staff Account Created";
     header("location: ../staff.php?error=none");
     exit();
 
@@ -355,24 +355,17 @@ function createUserEmployee($conn, $name, $email, $username, $pwd)
 
 
 
-function createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt) {
-    $sql = "INSERT into ZOOSchema.Employees(E_Name, E_Birthdate, E_Gender, E_Email, E_PhoneNumber, E_Address, E_Pay, E_JobTitle, E_WorkHours, E_Department, E_Location ) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
-    
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql))
-    {
-        header("location: ../staff.php?error=stmt2failed");
-        exit();
+function createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt,$username,$pwd) {
 
+    $sql2 = "INSERT into Employees (E_Name, E_Birthdate, E_Gender, E_Email, E_PhoneNumber, E_Address, E_Pay, E_JobTitle, E_WorkHours, E_Department, E_Location) VALUES ('$name', '$birthday', '$gender', '$email', '$phone_number', '$address', '$wage', '$job_title', '$workHours', '$department', '$worksAt')";
+    if( mysqli_query($conn,$sql2)) {
+        echo "New record created";
     }
-
-    //$hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-    mysqli_stmt_bind_param($stmt, "sssssssssss", $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title,$workHours, $department, $worksAt );
-    mysqli_stmt_execute($stmt);
-
-    mysqli_stmt_close($stmt);
-
-
+    else {
+        echo "FAIL";
+        header("location: staff.php");
+    }
+    createUserEmployee($conn, $name, $email, $username, $pwd);
     header("location: ../staff.php?error=none");
     exit();
 

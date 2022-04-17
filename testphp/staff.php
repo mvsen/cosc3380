@@ -82,7 +82,7 @@ include_once 'header.php';
          $dBPassword = "cosc3380";
          $dBname = "ZOOSchema";
          $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
-         $sql = "SELECT * FROM ZOOSchema.Departments;";
+         $sql = "SELECT * FROM ZOOSchema.Location;";
          $stmt = mysqli_stmt_init($conn);
          if (!mysqli_stmt_prepare($stmt, $sql)) {
             header("location: ../staff.php?error=stmt1failed");
@@ -93,7 +93,7 @@ include_once 'header.php';
          echo "<select name='worksat'>";
          echo "<option value=''>Select a Location</option>";
          while($row = mysqli_fetch_array($result)){
-            echo "<option value='" . $row['D_Location'] ."'>" . $row['D_Location'] ."</option>";
+            echo "<option value='" . $row['LO_Name'] ."'>" . $row['LO_Name'] ."</option>";
          }
          echo "</select>";
 ?> 
@@ -431,7 +431,7 @@ if (isset($_GET["error"]))
                      $dBPassword = "cosc3380";
                      $dBname = "ZOOSchema";
                      $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
-                     $sql = "SELECT * FROM ZOOSchema.Employees;";
+                     $sql = "SELECT * FROM ZOOSchema.Location;";
                      $stmt = mysqli_stmt_init($conn);
                      if (!mysqli_stmt_prepare($stmt, $sql)){
                      header("location: ../staff.php?error=stmt1failed");
@@ -443,7 +443,7 @@ if (isset($_GET["error"]))
                      echo "<select name='WorksAt'>";
                      echo "<option value=''>Select a Location</option>";
                      while($row = mysqli_fetch_array($result)){
-                        echo "<option value='" . $row['E_Location'] ."'>" . $row['E_Location'] ."</option>";
+                        echo "<option value='" . $row['LO_Name'] ."'>" . $row['LO_Name'] ."</option>";
                      }
                      echo "</select>";
 ?>
@@ -459,7 +459,19 @@ if (isset($_GET["error"]))
 
             </form>
          </div>
-
+<style type="text/css">
+        table {
+            border: 1px solid rgb(0,0,0);
+        }
+        table > thead > tr > th {
+            font-size: 2em;
+            border: 1px solid rgb(0,0,0);
+        }
+        table > tbody > tr > td {
+            color: rgb(0,0,0);
+            border: 1px solid rgb(0,0,0);
+        }
+</style>
             <div class="row">
                <table class="table table-striped table-hover">
                   <thread>
@@ -474,7 +486,6 @@ if (isset($_GET["error"]))
                         <th>Works At</th>
                      </tr>
                   </thread>
-               </table>
                <tbody>
 <?php
                $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
@@ -499,23 +510,23 @@ if (isset($_GET["error"]))
                         if(mysqli_num_rows($data) > 0 ) {
                            while($row = mysqli_fetch_assoc($data)) {
                               $ID1 = $row['E_ID'];
-                              $Name1 = $row['Name'];
+                              $Name1 = $row['E_Name'];
                               $Gender1 = $row['E_Gender'];
                               $Month1 = $row['E_Birthdate'];
                               $pnumber1 = $row['E_PhoneNumber'];
                               $Email1 = $row['E_Email'];
                               $Department1 = $row['E_Department'];
                               $WorksAt1 = $row['E_Location'];
-?>
+?>                       
                               <tr>
-                                 <td><?php echo $ID1;?></td>
-                                 <td><?php echo $Name1;?></td>
-                                 <td><?php echo $Gender1;?></td>
-                                 <td><?php echo $Month1;?></td>
-                                 <td><?php echo $pnumber1;?></td>
-                                 <td><?php echo $Email1;?></td>
-                                 <td><?php echo $Department1;?></td>
-                                 <td><?php echo $WorksAt1;?></td>
+                                 <td width: 40%><?php echo $ID1;?></td>
+                                 <td width: 40%><?php echo $Name1;?></td>
+                                 <td width: 40%><?php echo $Gender1;?></td>
+                                 <td width: 40%><?php echo $Month1;?></td>
+                                 <td width: 40%><?php echo $pnumber1;?></td>
+                                 <td width: 40%><?php echo $Email1;?></td>
+                                 <td width: 40%><?php echo $Department1;?></td>
+                                 <td width: 40%><?php echo $WorksAt1;?></td>
                               </tr>
 <?php
                             }
@@ -531,6 +542,7 @@ if (isset($_GET["error"]))
                   }
 ?>
                </tbody>
+               </table>
          </div>
       </div>
                </body>
