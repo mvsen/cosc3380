@@ -1263,32 +1263,20 @@ $type = $_GET['type3'];
 
 if ($type == "least")
 {
-    $sql = "SELECT PR_Id, sum(quantity) as 'Quantity',
-    CASE WHEN PR_Id = 3 THEN 'Adult Train Voucher'
-        WHEN PR_Id = 4 THEN 'Youth Train Voucher'
-        WHEN PR_Id = 5 THEN 'Adult Carousel Voucher'
-        WHEN PR_Id = 6 THEN 'Youth Train Voucher'
-        WHEN PR_Id = 7 THEN 'Adult Feris Wheel Voucher'
-        ELSE 'Youth Feris Wheel Voucher'
-        END AS 'Voucher Name'
-        FROM ZOOSchema.Tickets
-      where PR_Id != 1 and PR_Id != 2
-      group by PR_Id
-      order by sum(quantity) asc;";
+    $sql = "SELECT Products.Pr_Name as 'Name', Products.PR_Quantity as 'Inventory Left', Pr_Cost as 'Cost', sum(Tickets.quantity) as 'Quantity Purchased', (Pr_Cost*sum(Tickets.quantity)) as 'Revenue'
+    FROM ZOOSchema.Products
+    Left join Tickets on Products.Pr_ID = Tickets.PR_Id
+    where Products.PR_ID != 1 and Products.PR_ID != 2
+    group by Pr_Name
+    order by sum(Tickets.quantity) asc;";
 }
 else{
-    $sql = "SELECT PR_Id, sum(quantity) as 'Quantity',
-    CASE WHEN PR_Id = 3 THEN 'Adult Train Voucher'
-        WHEN PR_Id = 4 THEN 'Youth Train Voucher'
-        WHEN PR_Id = 5 THEN 'Adult Carousel Voucher'
-        WHEN PR_Id = 6 THEN 'Youth Train Voucher'
-        WHEN PR_Id = 7 THEN 'Adult Feris Wheel Voucher'
-        ELSE 'Youth Feris Wheel Voucher'
-        END AS 'Voucher Name'
-        FROM ZOOSchema.Tickets
-      where PR_Id != 1 and PR_Id != 2
-      group by PR_Id
-      order by sum(quantity) desc;";
+    $sql = "SELECT Products.Pr_Name as 'Name', Products.PR_Quantity as 'Inventory Left', Pr_Cost as 'Cost', sum(Tickets.quantity) as 'Quantity Purchased', (Pr_Cost*sum(Tickets.quantity)) as 'Revenue'
+    FROM ZOOSchema.Products
+    Left join Tickets on Products.Pr_ID = Tickets.PR_Id
+    where Products.PR_ID != 1 and Products.PR_ID != 2
+    group by Pr_Name
+    order by sum(Tickets.quantity) desc;";
 }
 
 $stmt = mysqli_stmt_init($conn);
@@ -1317,18 +1305,22 @@ $stmt = mysqli_stmt_init($conn);
         echo "<table border = '1' align = center'>";
 
         echo "<tr>";
-        echo "<th>Voucher Id</th>";
-        echo "<th>Quantity</th>";
-        echo "<th>Voucher Name</th>";
+        echo "<th>Name</th>";
+        echo "<th>Inventory Left</th>";
+        echo "<th>Cost</th>";
+        echo "<th>Quantity Purchased</th>";
+        echo "<th>Revenue</th>";
         echo "</tr>";
 
         while($row = mysqli_fetch_array($result))
         {
         
             echo "<tr>";
-            echo "<td>{$row['PR_Id']}</td>";
-            echo "<td>{$row['Quantity']}</td>";
-            echo "<td>{$row['Voucher Name']}</td>";
+            echo "<td>{$row['Name']}</td>";
+            echo "<td>{$row['Inventory Left']}</td>";
+            echo "<td>{$row['Cost']}</td>";
+            echo "<td>{$row['Quantity Purchased']}</td>";
+            echo "<td>{$row['Revenue']}</td>";
             echo "</tr>";
         }
         echo "</table>";
@@ -1507,6 +1499,160 @@ $stmt = mysqli_stmt_init($conn);
 
 </section>
 
+<p> Profits from admission and vouchers within a given time frame </p>
+<form method="get" >
+               
+               <?php
+                   $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+                   $dBUsername = "admin";
+                   $dBPassword = "cosc3380";
+                   $dBname = "ZOOSchema";
+                   $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+                   $sql = "SELECT * FROM ZOOSchema.Products;";
+                   $stmt = mysqli_stmt_init($conn);
+               if (!mysqli_stmt_prepare($stmt, $sql))
+               {
+                   header("location: ../profile.php?error=stmt1failed");
+                   exit();
+           
+               }
+               $username1 = $_SESSION['useruid'];
+              // mysqli_stmt_bind_param($stmt, "s", $username1);
+               mysqli_stmt_execute($stmt);
+           
+               $result = mysqli_stmt_get_result($stmt);
+
+               $sql2 = "SELECT * FROM ZOOSchema.users;";
+               $stmt2 = mysqli_stmt_init($conn);
+           if (!mysqli_stmt_prepare($stmt2, $sql2))
+           {
+               header("location: ../profile.php?error=stmt1failed");
+               exit();
+       
+           }
+           $username1 = $_SESSION['useruid'];
+          // mysqli_stmt_bind_param($stmt, "s", $username1);
+           mysqli_stmt_execute($stmt2);
+       
+           $result2 = mysqli_stmt_get_result($stmt2);
+
+
+             
+           
+               //$row = mysqli_fetch_assoc($resultData);
+               //print_r($row);
+               $all = "All";
+
+            
+               
+
+
+
+                   
+             
+                  // echo "<input type='text' name = 'id' value='". $newid." placeholder='". $newid." readonly>";
+                 //  echo "<input type='text' name='name' placeholder='Full name...'>";
+                   //echo "<input type='text' name='hours' placeholder='Hours Worked...'>";
+                   //echo "<input type='date' name='day' placeholder='day'>;
+                       
+                   ?>
+                           Start Date: <input type='date' name='day1' placeholder='Start Date...'>
+                   End Date: <input type='date' name='day2' placeholder='End Date'> 
+    
+        <button type="submit" name="submit7"> Generate Report</button>  
+           </form>
+           </div>
+           <?php
+
+                   
+                   
+                   
+
+
+
+
+
+
+?>
+
+<a = herf="#" onclick="widnow.print();"></a>
+<?php
+if (isset($_GET['submit7'])){
+$serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+$dBUsername = "admin";
+$dBPassword = "cosc3380";
+$dBname = "ZOOSchema";
+$conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+
+$day1 = $_GET['day1'];
+$day2 = $_GET['day2'];
+
+
+    $sql = "SELECT Products.Pr_Name as 'Name', Products.PR_Quantity as 'Inventory Left', Pr_Cost as 'Cost', sum(Tickets.quantity) as 'Quantity Purchased', (Pr_Cost*sum(Tickets.quantity)) as 'Revenue',   SUM((Pr_Cost*sum(Tickets.quantity))) OVER(ORDER BY  Pr_Cost
+    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) 
+         AS RunningTotal
+   FROM ZOOSchema.Products
+   Left join Tickets on Products.Pr_ID = Tickets.PR_Id
+   where Tickets.date_sold between '?' and '?'
+   group by Pr_Name;
+";
+
+
+
+$stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql))
+                {
+                    header("location: ../profilea.php?error=stmt1failed");
+                    exit();
+            
+                }
+
+               mysqli_stmt_bind_param($stmt, "ss", $day1, $day2);
+                mysqli_stmt_execute($stmt);
+            
+                $result = mysqli_stmt_get_result($stmt);
+              
+
+
+                
+                
+
+
+  
+                
+            $count = mysqli_num_rows($result);
+
+        echo "<br/>$count Records Found";
+        echo "<table border = '1' align = center'>";
+
+        echo "<tr>";
+        echo "<th>Name</th>";
+        echo "<th>Inventory Left</th>";
+        echo "<th>Cost</th>";
+        echo "<th>Quantity Purchased</th>";
+        echo "<th>Revenue</th>";
+        echo "<th>Running Total</th>";
+        echo "</tr>";
+
+        while($row = mysqli_fetch_array($result))
+        {
+        
+            echo "<tr>";
+            echo "<td>{$row['Name']}</td>";
+            echo "<td>{$row['Inventory Left']}</td>";
+            echo "<td>{$row['Cost']}</td>";
+            echo "<td>{$row['Quantity Purchased']}</td>";
+            echo "<td>{$row['Revenue']}</td>";
+            echo "<td>{$row['RunningTotal']}</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+           
+          
+        }
+            ?>
+
+</section>
 
 
 

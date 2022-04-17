@@ -6,7 +6,7 @@ if (isset($_POST["submit"]))
     $birthday = $_POST["birthday"];
     $gender = $_POST["gender"];
     $email = $_POST["email"];
-    $phone_number = $_POST["phone_number"];
+    $phone_number = $_POST["phone"];
     $address = $_POST["address"];
     $username = $_POST["uid"];
     $pwd = $_POST["pwd"];
@@ -15,7 +15,7 @@ if (isset($_POST["submit"]))
     $job_title = $_POST["job_title"];
     $workHours = $_POST["workHours"];
     $department = $_POST["department"];
-    $worksAt = $_POST["worksAt"];
+    $worksAt = $_POST["worksat"];
 
 
     require_once 'dbh.inc.php';
@@ -47,18 +47,12 @@ if (isset($_POST["submit"]))
         header("location: ../staff.php?error=usernametaken");
         exit();
     }
-    if(invalidBDay($birthday) !== false) {
-        header("location: ../staff.php?error=invalidBDay");
-    }
-    if(isValidTelephoneNumber($phone_number) == false)
-    {
-        header("location: ../staff.php?error=invalidphonenumber");
-    }
-    
 
-    createEmployee($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt,$username,$pwd);
-    
 
+    
+    //createUserEmployee($conn, $name, $email, $username, $pwd);
+    createEmployee1($conn, $name,$birthday,$gender, $email, $phone_number, $address, $wage, $job_title, $workHours, $department, $worksAt,$username,$pwd);
+    
 }
 else {
     header("location: ../staff.php?error=none");
