@@ -4,7 +4,7 @@
 
 if(isset($_POST["submit2"]))
 {
-    $department = $_POST["department2"];
+    $department = $_POST["department"];
     $id = $_POST["id"];
     $hours = $_POST["hours"];
     $day = $_POST["day"];

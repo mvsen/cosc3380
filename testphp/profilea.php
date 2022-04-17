@@ -202,7 +202,7 @@ include_once 'header.php'
                     User ID :<input type='text' name = 'id' value="<?php echo $newid; ?>" placeholder="<?php echo $newid; ?>" readonly>
 
                     Date : <input type='date' name='day' placeholder='day'>  
-                    <button type="submit" name="submit3"> Delete Hours</button>  
+                    <button type="submit" name="submit5"> Delete Hours</button>  
             </form>
             </div>
             <?php
