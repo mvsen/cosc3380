@@ -202,7 +202,7 @@ include_once 'header.php'
                     User ID :<input type='text' name = 'id' value="<?php echo $newid; ?>" placeholder="<?php echo $newid; ?>" readonly>
 
                     Date : <input type='date' name='day' placeholder='day'>  
-                    <button type="submit" name="submit3"> Delete Hours</button>  
+                    <button type="submit" name="submit5"> Delete Hours</button>  
             </form>
             </div>
             <?php
@@ -352,6 +352,143 @@ $stmt = mysqli_stmt_init($conn);
 <section>
 
 <H2> Employees </H2>
+
+<section>
+ <H3> Staff</H3>           
+<form method="get" >
+               
+               <?php
+                   $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+                   $dBUsername = "admin";
+                   $dBPassword = "cosc3380";
+                   $dBname = "ZOOSchema";
+                   $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+                   $sql = "SELECT * FROM ZOOSchema.Products;";
+                   $stmt = mysqli_stmt_init($conn);
+               if (!mysqli_stmt_prepare($stmt, $sql))
+               {
+                   header("location: ../profile.php?error=stmt1failed");
+                   exit();
+           
+               }
+               $username1 = $_SESSION['useruid'];
+              // mysqli_stmt_bind_param($stmt, "s", $username1);
+               mysqli_stmt_execute($stmt);
+           
+               $result = mysqli_stmt_get_result($stmt);
+
+               $sql2 = "SELECT * FROM ZOOSchema.users;";
+               $stmt2 = mysqli_stmt_init($conn);
+           if (!mysqli_stmt_prepare($stmt2, $sql2))
+           {
+               header("location: ../profile.php?error=stmt1failed");
+               exit();
+       
+           }
+           $username1 = $_SESSION['useruid'];
+          // mysqli_stmt_bind_param($stmt, "s", $username1);
+           mysqli_stmt_execute($stmt2);
+       
+           $result2 = mysqli_stmt_get_result($stmt2);
+
+
+             
+           
+               //$row = mysqli_fetch_assoc($resultData);
+               //print_r($row);
+               $all = "All";
+
+
+
+
+                   
+             
+                  // echo "<input type='text' name = 'id' value='". $newid." placeholder='". $newid." readonly>";
+                 //  echo "<input type='text' name='name' placeholder='Full name...'>";
+                   //echo "<input type='text' name='hours' placeholder='Hours Worked...'>";
+                   //echo "<input type='date' name='day' placeholder='day'>;
+                       
+                   ?>
+        
+    
+        <button type="submit" name="submit20"> Show Staff</button>  
+           </form>
+           </div>
+           <?php
+
+                   
+                   
+                   
+
+
+
+
+
+
+?>
+
+<a = herf="#" onclick="widnow.print();"></a>
+<?php
+if (isset($_GET['submit20'])){
+$serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+$dBUsername = "admin";
+$dBPassword = "cosc3380";
+$dBname = "ZOOSchema";
+$conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+
+
+    $sql = "SELECT * FROM ZOOSchema.users where usersRank = 'employee';";
+
+
+$stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql))
+                {
+                    header("location: ../profilea.php?error=stmt1failed");
+                    exit();
+            
+                }
+
+               
+                mysqli_stmt_execute($stmt);
+            
+                $result = mysqli_stmt_get_result($stmt);
+              
+
+                
+                
+
+
+  
+                
+            $count = mysqli_num_rows($result);
+
+        echo "<br/>$count Records Found";
+        echo "<table border = '1' align = center'>";
+
+        echo "<tr>";
+        echo "<th>Id</th>";
+        echo "<th>Name</th>";
+        echo "<th>User Name</th>";
+        echo "<th>Email</th>";
+        echo "</tr>";
+
+        while($row = mysqli_fetch_array($result))
+        {
+        
+            echo "<tr>";
+            echo "<td>{$row['usersId']}</td>";
+            echo "<td>{$row['usersName']}</td>";
+            echo "<td>{$row['usersUid']}</td>";
+            echo "<td>{$row['usersEmail']}</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+           
+          
+        }
+            ?>
+
+</section>
 <p> Add Employee Work Hours</p>
  
 
@@ -381,7 +518,7 @@ $stmt = mysqli_stmt_init($conn);
                 $result = mysqli_stmt_get_result($stmt);
 
 
-                $sql2 = "SELECT * FROM ZOOSchema.users;";
+                $sql2 = "SELECT * FROM ZOOSchema.users where usersRank = 'employee';";
                 $stmt2 = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($stmt2, $sql2))
             {
@@ -481,7 +618,7 @@ $stmt = mysqli_stmt_init($conn);
                 $result = mysqli_stmt_get_result($stmt);
 
 
-                $sql2 = "SELECT * FROM ZOOSchema.users;";
+                $sql2 = "SELECT * FROM ZOOSchema.users where usersRank = 'employee';";
                 $stmt2 = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($stmt2, $sql2))
             {
@@ -595,7 +732,7 @@ $stmt = mysqli_stmt_init($conn);
            
                $result = mysqli_stmt_get_result($stmt);
 
-               $sql2 = "SELECT * FROM ZOOSchema.users;";
+               $sql2 = "SELECT * FROM ZOOSchema.users where usersRank = 'employee';";
                $stmt2 = mysqli_stmt_init($conn);
            if (!mysqli_stmt_prepare($stmt2, $sql2))
            {
