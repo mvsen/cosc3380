@@ -20,7 +20,7 @@ include_once 'header.php'
         ?>
     
 <div class="about-section">
-<h2 class="w3-wide">ZOO Mania Team 6</h2>
+<h1 class="w3-wide">ZOO Mania Team 6</h1>
 
 <p><i>We love Animals</i></p>
   <p> Here at ZOO Mania we are all about the animals. We have such a love for animals that we’ve decided to create this amazing place where our guests can come visit and experience this love we feel for animals as well. There are so many things to do here at ZOO Mania. We have many attractions to visit, gift shops to buy your favorite souvenirs, and of course a food court in case you get a little hungry. </p>
