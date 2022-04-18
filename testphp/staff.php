@@ -287,7 +287,7 @@ if (isset($_GET["error"]))
                      $dBPassword = "cosc3380";
                      $dBname = "ZOOSchema";
                      $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
-                     $sql = "SELECT * FROM ZOOSchema.Employees;";
+                     $sql = "SELECT * FROM ZOOSchema.Location;";
                      $stmt = mysqli_stmt_init($conn);
                      if (!mysqli_stmt_prepare($stmt, $sql)){
                      header("location: ../staff.php?error=stmt1failed");
@@ -299,6 +299,7 @@ if (isset($_GET["error"]))
                      echo "<select name='WorksAt'>";
                      echo "<option value=''>Select a Location</option>";
                      while($row = mysqli_fetch_array($result)){
+<<<<<<< HEAD
                         echo "<option value='" . $row['E_Location'] ."'>" . $row['E_Location'] ."</option>";
 =======
                <div class="form-group">
@@ -326,6 +327,9 @@ if (isset($_GET["error"]))
          
                         echo "<option value='" . $row['D_Name'] ."'>" . $row['D_Name'] ."</option>";
 >>>>>>> origin/Thu
+=======
+                        echo "<option value='" . $row['LO_Name'] ."'>" . $row['LO_Name'] ."</option>";
+>>>>>>> Masen
                      }
                      echo "</select>";
 ?>
@@ -345,8 +349,24 @@ if (isset($_GET["error"]))
 
             </form>
          </div>
+<<<<<<< HEAD
 
 <<<<<<< HEAD
+=======
+<style type="text/css">
+        table {
+            border: 1px solid rgb(0,0,0);
+        }
+        table > thead > tr > th {
+            font-size: 2em;
+            border: 1px solid rgb(0,0,0);
+        }
+        table > tbody > tr > td {
+            color: rgb(0,0,0);
+            border: 1px solid rgb(0,0,0);
+        }
+</style>
+>>>>>>> Masen
             <div class="row">
                <table class="table table-striped table-hover">
                   <thread>
@@ -361,7 +381,6 @@ if (isset($_GET["error"]))
                         <th>Works At</th>
                      </tr>
                   </thread>
-               </table>
                <tbody>
 <?php
                $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
@@ -382,6 +401,7 @@ if (isset($_GET["error"]))
                         $query = "SELECT * FROM ZOOSchema.Employees WHERE E_Name ='$Name' OR E_Gender = '$Gender' OR MONTH(E_Birthdate)='$Month'  OR E_Department = '$Department' OR E_Location = '$WorksAt'";
                         $data = mysqli_query($conn, $query) or die('error');
                         
+<<<<<<< HEAD
                         //$stmt = mysqli_stmt_init($conn);
                         //if (!mysqli_stmt_prepare($stmt, $query)){
                            //header("location: ../staff.php?error=stmt1failed");
@@ -491,6 +511,8 @@ if (isset($_GET["error"]))
                         $data = mysqli_query($conn, $query) or die('error');
                         
 >>>>>>> origin/Thu
+=======
+>>>>>>> Masen
                         if(mysqli_num_rows($data) > 0 ) {
                            while($row = mysqli_fetch_assoc($data)) {
                               $ID1 = $row['E_ID'];
@@ -533,10 +555,15 @@ if (isset($_GET["error"]))
                </section>
                </html>  
                </section>
+               
 <?php
 include_once 'footer.php';
+<<<<<<< HEAD
 ?>
 <<<<<<< HEAD
 >>>>>>> Masen
 =======
 >>>>>>> origin/Thu
+=======
+?>
+>>>>>>> Masen
