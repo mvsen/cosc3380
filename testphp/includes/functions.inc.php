@@ -311,21 +311,22 @@ function loginUser($conn, $username, $pwd)
 
         $sql = "SELECT usersRank from ZOOSchema.users where usersUid = ? OR usersEmail = ?;";
         $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql))
-    {
-        header("location: ../signup.php?error=stmt1failed");
-        exit();
-
-    }
-    mysqli_stmt_bind_param($stmt, "ss", $username, $email);
-    mysqli_stmt_execute($stmt);
-
-    $resultData = mysqli_stmt_get_result($stmt);
-
-    $row = mysqli_fetch_assoc($resultData);
-    $_SESSION["userR"] = $row['usersRank'];
-
     
+        if (!mysqli_stmt_prepare($stmt, $sql))
+        {
+            header("location: ../signup.php?error=stmt1failed");
+            exit();
+
+        }
+        mysqli_stmt_bind_param($stmt, "ss", $username, $email);
+        mysqli_stmt_execute($stmt);
+
+        $resultData = mysqli_stmt_get_result($stmt);
+
+        $row = mysqli_fetch_assoc($resultData);
+        $_SESSION["userR"] = $row['usersRank'];
+    }
+
 
 }
 function createUserEmployee($conn, $name, $email, $username, $pwd)

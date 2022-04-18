@@ -1,30 +1,14 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
+//<<<<<<< HEAD
+//<<<<<<< HEAD
 include_once 'header.php'
 
-<<<<<<< HEAD
-=======
-include_once 'header.php';
-
->>>>>>> origin/Thu
 ?>
 
 <?php error_reporting (E_ALL ^ E_NOTICE); ?> 
 <section class ="index-intro">
-<<<<<<< HEAD
-        <?php
-        
-                    if (isset($_SESSION["useruid"]))
-                    {
-                        echo "<p> Hello there " . $_SESSION['useruid'] . "</p>";
-                    }
-                    ?>
-        <h1> This is a Staff page </h1>
-=======
 =======
 include_once 'header.php';
->>>>>>> Masen
 
 ?>
 
