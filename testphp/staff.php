@@ -2,31 +2,33 @@
 include_once 'header.php';
 
 ?>
-
+<html>
+<link rel="stylesheet" href="css/style.css">
 <?php error_reporting (E_ALL ^ E_NOTICE); ?> 
+<div class = "container">
 <section class ="index-intro">
    <h1> This is a Staff page </h1>
       <h2> Add an Employee</h2>
       <div class="add-employee-form-form">
       <form action="includes/staff.inc.php" method="post" >
-         <input type="text" name="name" placeholder="Full name..." style="height:50px; width:150px;">
-         <input type="date" name="birthday" placeholder="DOB YYYY-MM-DD" min="1901-01-01" style="height:50px; width:150px;">
-         <select name="gender" id="gender" style="height:50px; width:150px;">
+      <input type="text" name="name" placeholder="Full name..." >
+         <input type="date" name="birthday" placeholder="DOB YYYY-MM-DD" min="1901-01-01" >
+         <select name="gender" id="gender" >
             <option value=''>Gender</option>
             <option value="Female">Female</option>
             <option value="Male">Male</option>
          </select>
-         <input type="tel" id="phone" name="phone" placeholder="Phone Number XXX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" style="height:50px; width:150px;">
-         <input type="text" name="address" placeholder="Street, City, State, Zipcode" style="height:50px; width:150px;">
+         <input type="tel" id="phone" name="phone" placeholder="Phone Number XXX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" >
+         <input type="text" name="address" placeholder="Street, City, State, Zipcode" >
          <p> Create Account for Employee </p>
-         <input type="text" name="email" placeholder="email..." style="height:50px; width:150px;">
-         <input type="text" name="uid" placeholder="Username..." style="height:50px; width:150px;">
-         <input type="password" name="pwd" placeholder="Password..." style="height:50px; width:150px;">
-         <input type="password" name="pwdrepeat" placeholder="Repeat Password..." style="height:50px; width:150px;">
+         <input type="text" name="email" placeholder="email..." >
+         <input type="text" name="uid" placeholder="Username..." >
+         <input type="password" name="pwd" placeholder="Password..." >
+         <input type="password" name="pwdrepeat" placeholder="Repeat Password..." >
          <p> Job Description </p>                
-         <input type="text" name="wage" placeholder="Wage ($/hr)" style="height:50px; width:150px;">
-         <input type="text" name="job_title" placeholder="Job Title" style="height:50px; width:150px;">
-         <input type="text" name="workHours" placeholder="Work Hours" style="height:50px; width:150px;">
+         <input type="text" name="wage" placeholder="Wage ($/hr)" >
+         <input type="text" name="job_title" placeholder="Job Title" >
+         <input type="text" name="workHours" placeholder="Work Hours" >
                
 <?php
          $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
@@ -64,16 +66,20 @@ include_once 'header.php';
          mysqli_stmt_execute($stmt);
          $result = mysqli_stmt_get_result($stmt);
          echo "<select name='worksat'>";
-         echo "<option value=''>Select a Location</option>";
+         echo "<option value='' disabled selected>Select a Location</option>";
          while($row = mysqli_fetch_array($result)){
             echo "<option value='" . $row['LO_Name'] ."'>" . $row['LO_Name'] ."</option>";
          }
          echo "</select>";
 ?> 
-         
-         <button type="submit" name="submit"> Add Employee </button>
-
+         <div class="form-group">
+                  <label class="col-lg-2 control-label"></label>
+                     <div class="col-lg-4">
+                     <input type="submit" name="submit" class="form-control">
+                     </div>
+               </div> 
       </form>
+      </div>
       </div>
 <?php
 if (isset($_GET["error"]))
@@ -115,12 +121,13 @@ if (isset($_GET["error"]))
        echo "<p>You have succesfully signed the employee up!</p>";
     }
     
-}    
+} 
+   
 ?> 
 
 <html>
       <div class="container">
-         <h3>Request Information about the Employees</h3>
+         <h2>Request Information about the Employees</h2>
          <div class="row">
             <form class="form-horizontal" action="staff.php" method="post">
                <div class="form-group">
@@ -303,8 +310,9 @@ if (isset($_GET["error"]))
       </div>
                </body>
                </section>
-               </html>  
+
                </section>
+ </html>              
 <?php
 include_once 'footer.php';
 ?>
