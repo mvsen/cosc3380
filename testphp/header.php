@@ -6,7 +6,6 @@
 
 <!DOCTYPE html>
 <html lang="en" dir= "ltr>
-
 <head>
     <title> ZOO Group 6 </title>
     <link rel="stylesheet" href="css/style.css">
@@ -19,7 +18,7 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body {
 	margin: 0;
-	background: #FFFFFF;
+	background:#F5E0A5;
 	font-family: 'Work Sans', sans-serif;
 	font-weight: 800;
 }
@@ -30,7 +29,7 @@ body {
 }
 
 header {
-  background: #55d6aa;
+  background: #A8882F;
   height: 65px;
 }
 
@@ -71,14 +70,14 @@ nav a {
 }
 
 nav a:hover {
-  color: #000;
+  color: white;
 }
 
 nav a::before {
   content: '';
   display: block;
   height: 5px;
-  background-color: #444;
+  background-color: white;
 
   position: absolute;
   top: 0;
@@ -105,21 +104,21 @@ nav a:hover::before {
                 <?php
                     if (isset($_SESSION["useruid"]))
                     {
-                        if(($_SESSION["usersRank"]) == 'employee')
+                        if(($_SESSION["userR"]) == "employee")
                         {
                             echo '<li><a href ="profile.php">Profile Page</a><li>';
-                            echo '<li><a href ="schedule.php">Shop</a><li>';
+                            echo '<li><a href ="schedule.php">Schedule</a><li>';
                             echo '<li><a href ="includes/logout.inc.php">Log Out</a><li>';
                         }
-                        else if(($_SESSION["usersRank"]) == 'customer') {
-                            echo '<li><a href ="profile.php">Profile Page</a><li>';
+                        else if(($_SESSION["userR"]) =="customer") {
+                            echo '<li><a href ="profilec.php">Profile Page</a><li>';
                             echo '<li><a href ="shop.php">Shop</a><li>';
                             echo '<li><a href ="includes/logout.inc.php">Log Out</a><li>';
 
                         }
                         else{
                           
-
+                            echo '<li><a href ="profilea.php">Profile Page</a><li>';
                             echo '<li><a href ="staff.php">Staff</a><li>';
                             echo '<li><a href ="schedule.php">Schedule</a><li>';
                             echo '<li><a href ="inventory.php">Inventory</a><li>';
@@ -146,4 +145,3 @@ nav a:hover::before {
     </nav>
 </header>
     <div class="wrapper">
-    
