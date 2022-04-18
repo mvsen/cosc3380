@@ -3,183 +3,335 @@ include_once 'header.php'
 
 ?>
 
+<link rel="stylesheet" href="css/style.css">
 <section class ="index-intro">
-        <?php
-                    if (isset($_SESSION["useruid"]))
-                    {
-                        echo "<p> Hello there " . $_SESSION['useruid'] . "</p>";
-                        
-                    }
 
 
-
-        ?>
-
-        
-
-            <h1> Profile Page</h1>
-            
-        </section>
-
-        <section><form action="/action_page.php">
         <p> Update your information </p>
-  <label for="cars">Choose field to Update:</label>
-  <select name="cars" id="cars">
-    <option value="name">Name</option>
-    <option value="email">Email</option>
-    <option value="uid">Username</option>
-    <option value="pwd">Password</option>
-  </select>
-  <br><br>
+ 
+
 
   <div class="signup-form-form">
-            <form action="includes/signup.inc.php" method="post" >
-                <input type="text" name="oldX" placeholder="Current info...">
-                <input type="text" name="newX" placeholder="New Info...">
-                <button type="submit" name="submit"> Submit </button>
+            <form action="includes/profile.inc.php" method="post" >
+                <?php
+                    $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+                    $dBUsername = "admin";
+                    $dBPassword = "cosc3380";
+                    $dBname = "ZOOSchema";
+                    $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+                    $sql = "SELECT * from ZOOSchema.users where usersUid = ?;";
+                    $stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql))
+                {
+                    header("location: ../profile.php?error=stmt1failed");
+                    exit();
+            
+                }
+                $username1 = $_SESSION['useruid'];
+                mysqli_stmt_bind_param($stmt, "s", $username1);
+                mysqli_stmt_execute($stmt);
+            
+                $result = mysqli_stmt_get_result($stmt);
+            
+                //$row = mysqli_fetch_assoc($resultData);
+                //print_r($row);
+
+            
+                    while($row = mysqli_fetch_array($result)){
+                        //print_r($row);
+                        $newid = $row['usersId'];
+                    ?>
+                       User ID: <input type="text" name = id value="<?php echo $row['usersId']; ?>" placeholder="<?php echo $row['usersId']; ?>" readonly>
+                Full Name:<input type="text" name="name" placeholder="Full name...">
+                Email:<input type="text" name="email" placeholder="email...">
+                Username:<input type="text" name="uid" placeholder="Username...">
+                Password:<input type="password" name="pwd" placeholder="Password...">
+                Repeat Password:<input type="password" name="pwdrepeat" placeholder="Repeat Password...">
+                <button type="submit" name="update"> Update </button>
 
             </form>
             </div>
+            <?php
+
+                    }
+                    
+                
 
 
-</form>
-</div>
-<?php
 
-if (isset($_GET["error"]))
-{
-if($_GET["error"] == "emptyinput")
-{
-echo "<p>Fill in all fields!</p>";
-}
-else if ($_GET["error"] == "invaliduid")
-{
-echo "<p>Choose a proper username!</p>";
-}
-else if ($_GET["error"] == "invalidemail")
-{
-echo "<p>Choose a proper email!</p>";
-}
-else if ($_GET["error"] == "passwordsdontmatch")
-{
-echo "<p>Make sure passwords match!!</p>";
-}
-else if ($_GET["error"] == "smtm1failed")
-{
-echo "<p>Something went wrong, try again.</p>";
-}
-else if ($_GET["error"] == "smtm2failed")
-{
-echo "<p>Something went wrong, try again.</p>";
-}
-else if ($_GET["error"] == "usernametaken")
-{
-echo "<p>Username already taken. Try something else.</p>";
-}
-else if ($_GET["error"] == "none")
-{
-echo "<p>You have succesfully signed up!</p>";
-}
 
-}
+
+
+?>
+</form></section>
+
+
+<section id="ABC">
+
+
+<p> Add Work Hours</p>
+ 
+
+
+  <div class="signup-form-form">
+      
+            <form action="includes/profile5.inc.php" method="post" >
+                
+                <?php
+                    $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+                    $dBUsername = "admin";
+                    $dBPassword = "cosc3380";
+                    $dBname = "ZOOSchema";
+                    $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+                    $sql = "SELECT * FROM ZOOSchema.Departments;";
+                    $stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql))
+                {
+                    header("location: ../profile.php?error=stmt1failed");
+                    exit();
+            
+                }
+                $username1 = $_SESSION['useruid'];
+               // mysqli_stmt_bind_param($stmt, "s", $username1);
+                mysqli_stmt_execute($stmt);
+            
+                $result = mysqli_stmt_get_result($stmt);
+
+              
+            
+                //$row = mysqli_fetch_assoc($resultData);
+                //print_r($row);
+                
+                
+                echo "Department: <select name='department'>";
+                    while($row = mysqli_fetch_array($result)){
+                        
+                        echo "<option value='" . $row['D_Name'] ."'>" . $row['D_Name'] ."</option>";
+                        
+                    }
+                    
+                    
+                    echo "</select>";
+                    
+              
+                   // echo "<input type='text' name = 'id' value='". $newid." placeholder='". $newid." readonly>";
+                  //  echo "<input type='text' name='name' placeholder='Full name...'>";
+                    //echo "<input type='text' name='hours' placeholder='Hours Worked...'>";
+                    //echo "<input type='date' name='day' placeholder='day'>;
+                        
+                    ?>
+                    User ID :<input type='text' name = 'id' value="<?php echo $newid; ?>" placeholder="<?php echo $newid; ?>" readonly>
+                    Hours :<input type='text' name='hours' placeholder='Hours Worked...'>
+                    Date : <input type='date' name='day' placeholder='day'>  
+                    <button type="submit" name="submit5"> Submit Hours</button>  
+            </form>
+            </div>
+            <?php
+
+                    
+                    
+                    
+
+
+
+
+
 
 ?>
 
-
-
-
-
-</form></section>
 
 </section>
 
-<section><form action="/action_page.php">
-<p> Add information to your profile </p>
-<label for="cars">Choose field to add:</label>
-<select name="cars" id="cars">
-<option value="birthday">Birthday</option>
-<option value="Address">Address</option>
-
-</select>
-<br><br>
-
-<div class="signup-form-form">
-    <form action="includes/signup.inc.php" method="post" >
-        <input type="text" name="addX" placeholder="New info...">
-        <input type="text" name="addX" placeholder="Confirm Info...">
-        <button type="submit" name="submit"> Submit </button>
-
-    </form>
-    </div>
 
 
-</form>
-</div>
-<?php
+<section>
 
-if (isset($_GET["error"]))
-{
-if($_GET["error"] == "emptyinput")
-{
-echo "<p>Fill in all fields!</p>";
-}
-else if ($_GET["error"] == "invaliduid")
-{
-echo "<p>Choose a proper username!</p>";
-}
-else if ($_GET["error"] == "invalidemail")
-{
-echo "<p>Choose a proper email!</p>";
-}
-else if ($_GET["error"] == "passwordsdontmatch")
-{
-echo "<p>Make sure passwords match!!</p>";
-}
-else if ($_GET["error"] == "smtm1failed")
-{
-echo "<p>Something went wrong, try again.</p>";
-}
-else if ($_GET["error"] == "smtm2failed")
-{
-echo "<p>Something went wrong, try again.</p>";
-}
-else if ($_GET["error"] == "usernametaken")
-{
-echo "<p>Username already taken. Try something else.</p>";
-}
-else if ($_GET["error"] == "none")
-{
-echo "<p>You have succesfully signed up!</p>";
-}
 
-}
+
+
+
+</section>
+<section>
+<p> Generate Work History</p>
+ 
+
+
+ <div class="signup-form-form">
+     
+           <form method="get" >
+               
+               <?php
+                   $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+                   $dBUsername = "admin";
+                   $dBPassword = "cosc3380";
+                   $dBname = "ZOOSchema";
+                   $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+                   $sql = "SELECT * FROM ZOOSchema.Departments;";
+                   $stmt = mysqli_stmt_init($conn);
+               if (!mysqli_stmt_prepare($stmt, $sql))
+               {
+                   header("location: ../profile.php?error=stmt1failed");
+                   exit();
+           
+               }
+               $username1 = $_SESSION['useruid'];
+              // mysqli_stmt_bind_param($stmt, "s", $username1);
+               mysqli_stmt_execute($stmt);
+           
+               $result = mysqli_stmt_get_result($stmt);
+
+             
+           
+               //$row = mysqli_fetch_assoc($resultData);
+               //print_r($row);
+               $all = "All";
+               
+               echo "Department: <select name='department'>";
+                   while($row = mysqli_fetch_array($result)){
+                       
+                       echo "<option value='" . $row['D_Name'] ."'>" . $row['D_Name'] ."</option>";
+                       
+                   }
+                   
+                   echo "<option value='" . $all ."' placeholder='All'</option>";
+                   echo "</select>";
+                   
+             
+                  // echo "<input type='text' name = 'id' value='". $newid." placeholder='". $newid." readonly>";
+                 //  echo "<input type='text' name='name' placeholder='Full name...'>";
+                   //echo "<input type='text' name='hours' placeholder='Hours Worked...'>";
+                   //echo "<input type='date' name='day' placeholder='day'>;
+                       
+                   ?>
+                   User ID: <input type='text' name = 'id' value="<?php echo $newid; ?>" placeholder="<?php echo $newid; ?>" readonly>
+                   Start Date: <input type='date' name='day1' placeholder='Start Date...'>
+                   End Date: <input type='date' name='day2' placeholder='End Date'>  
+                   <button type="submit" name="submit2"> Generate History</button>  
+           </form>
+           </div>
+           <?php
+
+                   
+                   
+                   
+
+
+
+
+
 
 ?>
 
-<body class="bg-gray-900">
-  <div class="mt-20 p-4 rounded bg-white max-w-sm text-center border-t-4 border-red-600 mx-auto text-gray-700 pt-0">
-  
+<a = herf="#" onclick="widnow.print();"></a>
+<?php
+if (isset($_GET['department'])){
+$serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+$dBUsername = "admin";
+$dBPassword = "cosc3380";
+$dBname = "ZOOSchema";
+$conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+$dep = $_GET['department'];
+$day1 = $_GET['day1'];
+$day2 = $_GET['day2'];
+$username1 = $newid;
+$sql = "SELECT * FROM ZOOSchema.Hours where D_Name = ? and E_Id = ? and ZOOSchema.Hours.Date between ? and ?";
+$stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql))
+                {
+                    header("location: ../profile.php?error=stmt1failed");
+                    exit();
+            
+                }
 
-</span>
-    <h3 class="font-bold text-2xl text-black mb-2">Delete Account?</h3>
-    <p>You'll permanently loose your</p>
-    <ul class="list-disc inline-block text-left pt-2 ml-2">
-      <li>Profile</li>
-      <li>Invoice History</li>
-      <li>Disocunts</li>
-    </ul>
-    <div class="flex pt-8">
-      <button class="w-1/2 mr-1 bg-white border text-gray-600 border-gray-400 hover:bg-gray-300 py-2 px-4 rounded font-medium">Cancel</button>
-      <button class="w-1/2 ml-1 bg-red-600 border border-red-600 text-white border-gray-500 hover:bg-red-700 hover:border-red-700 py-2 px-4 rounded font-medium">Delete Account</button>
-    </div>
-  </div>
-</body>
+                mysqli_stmt_bind_param($stmt, "ssss", $dep, $username1, $day1, $day2);
+                mysqli_stmt_execute($stmt);
+            
+                $result = mysqli_stmt_get_result($stmt);
+                
+                $count = mysqli_num_rows($result);
+
+            echo "<br/>$count Records Found";
+            echo "<table border = '1' align = center'>";
+
+            echo "<tr>";
+            echo "<th>hours</th>";
+            echo "<th>Date</th>";
+            echo "<th>E_Id</th>";
+            echo "<th>D_Name</th>";
+            echo "<th>H_id</th>";
+            echo "</tr>";
+
+            while($row = mysqli_fetch_array($result))
+            {
+                echo "<tr>";
+                echo "<td>{$row['hours']}</td>";
+                echo "<td>{$row['Date']}</td>";
+                echo "<td>{$row['E_Id']}</td>";
+                echo "<td>{$row['D_Name']}</td>";
+                echo "<td>{$row['H_Id']}</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+        }
+            ?>
+
+        
+
+</section>
+
+
+
 
 
 
 
 
 <?php
+
+$serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
+                    $dBUsername = "admin";
+                    $dBPassword = "cosc3380";
+                    $dBname = "ZOOSchema";
+                    $conn = mysqli_connect($serverName,$dBUsername,$dBPassword,$dBname);
+if(isset($_POST['update']))
+{
+    $id = $_POST['id'];
+    $pwd = $_POST['pwd'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $username = $_POST['uid'];
+    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+    $sql = "UPDATE 'ZOOSchema.users' SET usersName=" .$name.", usersEmail=".$email.", usersUid=".$uid.", usersPwd=".$hashedPwd." where usersId = ".$id." ";
+
+    $stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql))
+                {
+                     echo '<p> Nope </p>';
+                    exit();
+            
+                }
+    mysqli_stmt_execute($stmt);
+
+            
+    //$query_run = mysqli_query($conn, $sql);
+    if($stmt)
+    {
+        echo '<p> Yes </p>';
+        
+    }
+    else{
+        echo '<p> No </p>';
+        echo "<p> ID " .$id."</p>";
+        echo "<p> Name " .$name."</p>";
+        echo "<p> Email " .$_POST['email']."</p>";
+        echo "<p> User " .$_POST['uid']."</p>";
+        
+
+    }
+    mysqli_stmt_close($stmt);
+    
+}
+
 include_once 'footer.php'
 
 ?>
