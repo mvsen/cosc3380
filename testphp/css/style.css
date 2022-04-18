@@ -53,12 +53,12 @@ html {
   }
   h2 {
     text-align: center;
-    color: #888;
+    color: white;
     font-size: 2em;
     margin-top: 0;
   }
   h3 {
-    color: #3227A8;
+    color: #69DDF5;
     font-size: 2em;
     margin-top: 0;
   }
@@ -102,7 +102,7 @@ html {
   }
   select{
     background:white;
-    width: 170px;
+    width: 180px;
     padding: 12px 20px;
     font-weight:600;
     color:black;
@@ -227,3 +227,22 @@ opacity: .85;
     background-color: white;
     font-family: "lato", sans-serif;
   }
+table {
+    border: 1px solid rgb(0,0,0);
+    /*width: 100%;*/
+}
+table > thead > tr > th {
+    font-size: 2em;
+    border: 1px solid rgb(0,0,0);
+}
+table > tbody > tr > td {
+    color: rgb(0,0,0);
+}
+#ABC {
+  background-color: #A8882F;
+  /*height: 100%;*/
+  /*position: absolute;*/
+  top: 0;
+  left: 0;
+  width: 100%;
+}
