@@ -9,7 +9,8 @@ include_once 'header.php'
         <?php
                     if (isset($_SESSION["useruid"]))
                     {
-                        echo "<h3> Hello there " . $_SESSION['useruid'] . "</h3>";
+                        echo "<h3> Hello there " . $_SESSION['userR'] . " , " . $_SESSION['useruid'] . "</h3>";
+                        
                         
                     }
 
@@ -17,7 +18,7 @@ include_once 'header.php'
 
         ?>
     
-<section class="w3-container w3-center w3-content" style="max-width:600px">
+<section class="w3-container w3-center w3-content" style="max-width:1500px">
 <h2 class="w3-wide">ZOO Mania Team 6</h2>
 
 <p class="w3-opacity"><i>We love Animals</i></p>
@@ -28,7 +29,7 @@ include_once 'header.php'
     
         <div class="row">
   <figure>
-    <img height = 200px src="https://miro.medium.com/max/1200/0*P3lTFfkO6az5NXHD">
+    <img height = 200px width = 500px src="https://miro.medium.com/max/1200/0*P3lTFfkO6az5NXHD">
     <figcaption>
       <h4>Our Animals</h4>
       <p>Come <a href ="discover.php"> meet</a> our plethora of animals. They are excited to see you!</p>
