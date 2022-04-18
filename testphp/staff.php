@@ -124,7 +124,9 @@ if (isset($_GET["error"]))
 } 
    
 ?> 
+</section>
 
+<section id="ABC">
 <html>
       <div class="container">
          <h2>Request Information about the Employees</h2>
@@ -226,6 +228,7 @@ if (isset($_GET["error"]))
 <style type="text/css">
         table {
             border: 1px solid rgb(0,0,0);
+            width: 100%;
         }
         table > thead > tr > th {
             font-size: 2em;
@@ -233,7 +236,7 @@ if (isset($_GET["error"]))
         }
         table > tbody > tr > td {
             color: rgb(0,0,0);
-            border: 1px solid rgb(0,0,0);
+
         }
 </style>
             <div class="row">
@@ -312,7 +315,8 @@ if (isset($_GET["error"]))
                </section>
 
                </section>
- </html>              
+ </html>  
+               </section>            
 <?php
 include_once 'footer.php';
 ?>
