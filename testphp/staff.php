@@ -11,25 +11,37 @@ include_once 'header.php';
       <h2> Add an Employee</h2>
       <div class="add-employee-form-form">
       <form action="includes/staff.inc.php" method="post" >
+      <label class="col-lg-2 control-label">Name</label>
       <input type="text" name="name" placeholder="Full name..." >
-         <input type="date" name="birthday" placeholder="DOB YYYY-MM-DD" min="1901-01-01" >
-         <select name="gender" id="gender" >
+      <label class="col-lg-2 control-label">Birthday</label>
+      <input type="date" name="birthday" placeholder="DOB YYYY-MM-DD" min="1901-01-01" >
+      <label class="col-lg-2 control-label">Gender</label>
+      <select name="gender" id="gender" >
             <option value=''>Gender</option>
             <option value="Female">Female</option>
             <option value="Male">Male</option>
          </select>
+         <label class="col-lg-2 control-label">Phone Number</label>
          <input type="tel" id="phone" name="phone" placeholder="Phone Number XXX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" >
+         <label class="col-lg-2 control-label">Address</label>
          <input type="text" name="address" placeholder="Street, City, State, Zipcode" >
          <p> Create Account for Employee </p>
+         <label class="col-lg-2 control-label">Email</label>
          <input type="text" name="email" placeholder="email..." >
+         <label class="col-lg-2 control-label">Username</label>
          <input type="text" name="uid" placeholder="Username..." >
+         <label class="col-lg-2 control-label">Password</label>
          <input type="password" name="pwd" placeholder="Password..." >
+         <label class="col-lg-2 control-label">Repeat Password</label>
          <input type="password" name="pwdrepeat" placeholder="Repeat Password..." >
-         <p> Job Description </p>                
+         <p> Job Description </p> 
+         <label class="col-lg-2 control-label">Wage</label>               
          <input type="text" name="wage" placeholder="Wage ($/hr)" >
+         <label class="col-lg-2 control-label">Job Title</label>
          <input type="text" name="job_title" placeholder="Job Title" >
+         <label class="col-lg-2 control-label">Work Hours</label>
          <input type="text" name="workHours" placeholder="Work Hours" >
-               
+         <label class="col-lg-2 control-label">Department</label>      
 <?php
          $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
          $dBUsername = "admin";
@@ -44,6 +56,7 @@ include_once 'header.php';
          }
          mysqli_stmt_execute($stmt);
          $result = mysqli_stmt_get_result($stmt);
+         
          echo "<select name='department'>";
          echo "<option value=''>Select a Department</option>";
          while($row = mysqli_fetch_array($result)){
@@ -51,7 +64,9 @@ include_once 'header.php';
          }
          echo "</select>";
 ?> 
+         <label class="col-lg-2 control-label">Location</label>
 <?php
+
          $serverName = "database-1.c8gxaoh2plvu.us-east-1.rds.amazonaws.com";
          $dBUsername = "admin";
          $dBPassword = "cosc3380";
@@ -65,6 +80,7 @@ include_once 'header.php';
          }
          mysqli_stmt_execute($stmt);
          $result = mysqli_stmt_get_result($stmt);
+         
          echo "<select name='worksat'>";
          echo "<option value='' disabled selected>Select a Location</option>";
          while($row = mysqli_fetch_array($result)){
@@ -75,9 +91,9 @@ include_once 'header.php';
          <div class="form-group">
                   <label class="col-lg-2 control-label"></label>
                      <div class="col-lg-4">
-                     <input type="submit" name="submit" class="form-control">
+                     <input type="submit" name="submit">
                      </div>
-               </div> 
+                  </div> 
       </form>
       </div>
       </div>
