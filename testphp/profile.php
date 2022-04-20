@@ -40,11 +40,12 @@ include_once 'header.php'
                     while($row = mysqli_fetch_array($result)){
                         //print_r($row);
                         $newid = $row['usersId'];
+                        $em = $row['usersEmail'];
                     ?>
                        User ID: <input type="text" name = id value="<?php echo $row['usersId']; ?>" placeholder="<?php echo $row['usersId']; ?>" readonly>
-                Full Name:<input type="text" name="name" placeholder="Full name...">
-                Email:<input type="text" name="email" placeholder="email...">
-                Username:<input type="text" name="uid" placeholder="Username...">
+                Full Name:<input type="text" name="name" value="<?php echo $row['usersName']; ?>" placeholder="<?php echo $row['usersName']; ?>">
+                Email:<input type="text" name="email" value="<?php echo $row['usersEmail']; ?>" placeholder="<?php echo $row['usersEmail']; ?>">
+                Username:<input type="text" name="uid" value="<?php echo $row['usersUid']; ?>" placeholder="<?php echo $row['usersUid']; ?>">
                 Password:<input type="password" name="pwd" placeholder="Password...">
                 Repeat Password:<input type="password" name="pwdrepeat" placeholder="Repeat Password...">
                 <button type="submit" name="update"> Update </button>

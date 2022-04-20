@@ -123,6 +123,7 @@ nav a:hover::before {
                             echo '<li><a href ="staff.php">Staff</a><li>';
                             echo '<li><a href ="schedule.php">Schedule</a><li>';
                             echo '<li><a href ="inventory.php">Inventory</a><li>';
+                            echo '<li><a href ="reports.php">Reports</a><li>';
                             echo '<li><a href ="includes/logout.inc.php">Log Out</a><li>';
                         }
                        
